@@ -28,9 +28,7 @@ class CityTimeBloc extends Bloc<CityTimeState> {
   }
 
   bool checkTimeOfDay() {
-    bool isDayTime;
     DateTime time = DateTime.parse(state.cityTime['datetime']);
-    isDayTime = time.hour >= 8 && time.hour <= 20 ? true : false;
-    return isDayTime;
+    return time.hour >= 8 && time.hour <= 20 ? true : false;
   }
 }

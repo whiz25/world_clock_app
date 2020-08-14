@@ -5,7 +5,7 @@ import 'package:world_clock_app/bloc/city_time_state.dart';
 
 class CityTime extends StatefulWidget {
   @override
-  _CityTimeState createState() => _CityTimeState();
+  State createState() => _CityTimeState();
 }
 
 class _CityTimeState extends State<CityTime> {
