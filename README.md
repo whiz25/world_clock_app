@@ -1,4 +1,4 @@
-# world_clock_app
+# World Clock App
 
 A new Flutter project.
 
