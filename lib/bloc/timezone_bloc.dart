@@ -13,6 +13,14 @@ class TimezoneBloc extends Bloc<TimezoneState> {
     TimezoneClient timezoneClient = TimezoneClient();
     List<dynamic> timezones =
         await timezoneClient.loadTimezones(region: 'Africa');
-    return TimezoneState(timezones: timezones);
+    return TimezoneState(
+        timezones: timezones,
+        hasReachedEndOfResult: false,
+        pageNumber: 0,
+        pageSize: 10);
+  }
+
+  Future<void> loadNextPage() async {
+    
   }
 }
