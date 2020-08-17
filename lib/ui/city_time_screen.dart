@@ -4,17 +4,19 @@ import 'package:world_clock_app/bloc/city_time_bloc.dart';
 import 'package:world_clock_app/bloc/city_time_state.dart';
 
 class CityTime extends StatefulWidget {
+  final String url;
+  CityTime({@required this.url});
+
   @override
   State createState() => _CityTimeState();
 }
 
 class _CityTimeState extends State<CityTime> {
-  CityTimeBloc bloc;
+  CityTimeBloc bloc = CityTimeBloc();
 
   @override
   void initState() {
-    bloc = CityTimeBloc();
-
+    bloc = CityTimeBloc(url: this.widget.url);
     super.initState();
   }
 
@@ -25,7 +27,7 @@ class _CityTimeState extends State<CityTime> {
       builder: (context, state, bloc) {
         return Scaffold(
           appBar: AppBar(
-            title: Text('Africa/Kampala'),
+            title: Text(bloc.url),
           ),
           body: _buildCityTime(context, state),
         );

@@ -17,7 +17,7 @@ class _TimezoneListState extends State<TimezoneList> {
 
   @override
   void initState() {
-    bloc = TimezoneBloc();
+    bloc = TimezoneBloc(region: this.widget.region);
     super.initState();
   }
 
@@ -28,7 +28,7 @@ class _TimezoneListState extends State<TimezoneList> {
         builder: (context, state, bloc) {
           return Scaffold(
             appBar: AppBar(
-              title: Text('Africa'),
+              title: Text(bloc.region),
             ),
             body: _buildTimezoneList(context, state),
           );

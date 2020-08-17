@@ -12,7 +12,7 @@ class TimezoneBloc extends Bloc<TimezoneState> {
   FutureOr<TimezoneState> loadInitialState() async {
     TimezoneClient timezoneClient = TimezoneClient();
     List<dynamic> timezones =
-        await timezoneClient.loadTimezones(region: 'Africa');
+        await timezoneClient.loadTimezones(region: this.region);
     return TimezoneState(timezones: timezones);
   }
 }
