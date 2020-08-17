@@ -20,15 +20,12 @@ class _CityTimeState extends State<CityTime> {
 
   @override
   Widget build(BuildContext context) {
-    Map data = ModalRoute.of(context).settings.arguments;
-    String city = data["city"];
-
     return BlocPresenter<CityTimeState, CityTimeBloc>(
       bloc: bloc,
       builder: (context, state, bloc) {
         return Scaffold(
           appBar: AppBar(
-            title: Text(city),
+            title: Text('Africa/Kampala'),
           ),
           body: _buildCityTime(context, state),
         );

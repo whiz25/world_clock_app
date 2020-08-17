@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:world_clock_app/bloc/bloc_provider.dart';
 import 'package:world_clock_app/bloc/region_bloc.dart';
 import 'package:world_clock_app/bloc/region_state.dart';
+import 'package:world_clock_app/ui/timezones_list_screen.dart';
 
 class ListRegions extends StatefulWidget {
   @override
@@ -56,11 +57,14 @@ class _ListRegionsState extends State<ListRegions> {
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
             title: Text(state.regions[index]),
-            trailing: Icon(Icons.arrow_forward_ios),
-            onTap: () {
-              Navigator.pushNamed(context, '/timezones',
-                  arguments: {'region': state.regions[index]});
-            },
+            trailing: IconButton(
+              icon: Icon(Icons.arrow_forward_ios),
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) =>
+                        TimezoneList(region: state.regions[index])));
+              },
+            ),
           );
         });
   }
