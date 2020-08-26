@@ -43,8 +43,10 @@ class _TimezoneListState extends State<TimezoneList> {
             title: Text(state.timezones[index]),
             trailing: Icon(Icons.arrow_forward_ios),
             onTap: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => CityTime(url: state.timezones[index],)));
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => CityTime(
+                        url: state.timezones[index],
+                      )));
             },
           );
         });
