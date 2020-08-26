@@ -1,11 +1,14 @@
-import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:world_clock_app/model/region_model.dart';
 
 class RegionState {
-  List<dynamic> regions;
+  RegionModel regions;
 
-  RegionState({@required this.regions});
+  RegionState({this.regions});
 
-  RegionState copyWith({List<dynamic> regions}) {
+  RegionState copyWith({RegionModel regions}) {
     return RegionState(regions: regions ?? this.regions);
   }
+
+  String get getLocalTime => DateFormat.Hms().format(DateTime.now());
 }

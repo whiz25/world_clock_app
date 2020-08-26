@@ -38,7 +38,7 @@ class _ListRegionsState extends State<ListRegions> {
                         'Local Time',
                         style: TextStyle(),
                       ),
-                      Text(bloc.getLocalTime()),
+                      Text(state.getLocalTime),
                       SizedBox(
                         height: 570,
                         child: _buildList(context, state),
@@ -53,16 +53,16 @@ class _ListRegionsState extends State<ListRegions> {
   Widget _buildList(BuildContext context, RegionState state) {
     return ListView.builder(
         padding: const EdgeInsets.all(16.0),
-        itemCount: state.regions.length,
+        itemCount: state.regions.regions.length,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
-            title: Text(state.regions[index]),
+            title: Text(state.regions.regions[index]),
             trailing: IconButton(
               icon: Icon(Icons.arrow_forward_ios),
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) =>
-                        TimezoneList(region: state.regions[index])));
+                        TimezoneList(region: state.regions.regions[index])));
               },
             ),
           );

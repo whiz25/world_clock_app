@@ -1,15 +1,16 @@
 import 'dart:convert';
 
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:world_clock_app/model/region_model.dart';
 
 class RegionClient {
   Future<String> _loadRegions() async {
     return await rootBundle.loadString('assets/regions/regions.json');
   }
 
-  Future<List<dynamic>> loadRegions() async {
+  Future<RegionModel> loadRegions() async {
     String jsonString = await _loadRegions();
     final jsonResponse = json.decode(jsonString);
-    return jsonResponse['regions'];
+    return RegionModel.fromJson(jsonResponse);
   }
 }

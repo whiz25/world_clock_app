@@ -6,7 +6,7 @@ import 'package:world_clock_app/ui/city_time_screen.dart';
 
 class TimezoneList extends StatefulWidget {
   final String region;
-  TimezoneList({@required this.region});
+  TimezoneList({this.region});
 
   @override
   _TimezoneListState createState() => _TimezoneListState();
@@ -17,8 +17,8 @@ class _TimezoneListState extends State<TimezoneList> {
 
   @override
   void initState() {
-    bloc = TimezoneBloc(region: this.widget.region);
     super.initState();
+    bloc = TimezoneBloc(region: this.widget.region);
   }
 
   @override
@@ -44,7 +44,7 @@ class _TimezoneListState extends State<TimezoneList> {
             trailing: Icon(Icons.arrow_forward_ios),
             onTap: () {
               Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => CityTime()));
+                  .push(MaterialPageRoute(builder: (context) => CityTime(url: state.timezones[index],)));
             },
           );
         });

@@ -5,19 +5,20 @@ import 'package:world_clock_app/bloc/city_time_state.dart';
 
 class CityTime extends StatefulWidget {
   final String url;
-  CityTime({@required this.url});
+  CityTime({this.url});
 
   @override
   State createState() => _CityTimeState();
 }
 
 class _CityTimeState extends State<CityTime> {
+
   CityTimeBloc bloc = CityTimeBloc();
 
   @override
   void initState() {
-    bloc = CityTimeBloc(url: this.widget.url);
     super.initState();
+    bloc = CityTimeBloc(url: this.widget.url);
   }
 
   @override
@@ -41,12 +42,12 @@ class _CityTimeState extends State<CityTime> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            _displayDatetime(),
+            _displayDatetime(state),
             style: TextStyle(fontSize: 24.0),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: bloc.checkTimeOfDay()
+            child: state.checkTimeOfDay()
                 ? Icon(
                     Icons.wb_sunny,
                     size: 80.0,
@@ -57,7 +58,7 @@ class _CityTimeState extends State<CityTime> {
                   ),
           ),
           Text(
-            state.cityTime['datetime'].substring(11, 19),
+            state.cityTime.datetime.substring(11, 19),
             style: TextStyle(fontSize: 24.0),
           ),
         ],
@@ -65,7 +66,7 @@ class _CityTimeState extends State<CityTime> {
     );
   }
 
-  String _displayDatetime() {
-    return '${bloc.dayOfWeek()} ${bloc.dayOfMonth()} ${bloc.monthOfYear()}';
+  String _displayDatetime(CityTimeState state) {
+    return '${state.dayOfWeek}, ${state.dayOfMonth} ${state.monthOfYear}';
   }
 }
