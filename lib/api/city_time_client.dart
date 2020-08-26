@@ -14,6 +14,6 @@ Future<CityTimeModel> getCityTime({String url}) async {
       return CityTimeModel.fromJson(jsonResponse);
     }
   } catch (error) {
-    // Todo: show error to user
+    print(error);
   }
 }

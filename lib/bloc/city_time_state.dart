@@ -6,7 +6,7 @@ class CityTimeState {
 
   CityTimeState({this.cityTime});
 
-  CityTimeState copyWith({Map<String, dynamic> cityTime}) {
+  CityTimeState copyWith({CityTimeModel cityTime}) {
     return CityTimeState(cityTime: cityTime ?? this.cityTime);
   }
 
