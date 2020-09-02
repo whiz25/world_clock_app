@@ -16,8 +16,13 @@ class CityTimeState {
       DateFormat.MMMM().format(DateTime.parse(cityTime['datetime']));
 
   bool checkTimeOfDay() {
-    DateTime time = DateTime.parse(cityTime['datetime']);
-    return time.hour >= 8 && time.hour <= 20 ? true : false;
+    String datetime = cityTime['datetime'];
+    DateTime now = DateTime.parse(datetime);
+    String hours = cityTime['utc_offset'].substring(0, 3);
+    String minutes = cityTime['utc_offset'].substring(4, 6);
+    now =
+        now.add(Duration(hours: int.parse(hours), minutes: int.parse(minutes)));
+    return now.hour >= 8 && now.hour <= 20 ? true : false;
   }
 
   String dayOfWeek() {
