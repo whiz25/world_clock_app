@@ -9,22 +9,25 @@ class CityTimeState {
     return CityTimeState(cityTime: cityTime ?? this.cityTime);
   }
 
-  String get dayOfMonth {
-    String datetime = cityTime['datetime'];
-    return DateFormat.d().format(DateTime.parse(datetime));
-  }
-
-  String get monthOfYear =>
-      DateFormat.MMMM().format(DateTime.parse(cityTime['datetime']));
-
-  bool get checkTimeOfDay {
+  DateTime timeNow() {
     String datetime = cityTime['datetime'];
     DateTime now = DateTime.parse(datetime);
     String hours = cityTime['utc_offset'].substring(0, 3);
     String minutes = cityTime['utc_offset'].substring(4, 6);
     now =
         now.add(Duration(hours: int.parse(hours), minutes: int.parse(minutes)));
-    return now.hour >= 8 && now.hour <= 20 ? true : false;
+    return now;
+  }
+
+  String get dayOfMonth {
+    return DateFormat.d().format(timeNow());
+  }
+
+  String get monthOfYear =>
+      DateFormat.MMMM().format(DateTime.parse(cityTime['datetime']));
+
+  bool get checkTimeOfDay {
+    return timeNow().hour >= 8 && timeNow().hour <= 20 ? true : false;
   }
 
   String get dayOfWeek {
