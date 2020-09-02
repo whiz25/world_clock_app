@@ -38,8 +38,14 @@ class CityTimeState {
       case 5:
         return 'Friday';
         break;
+      case 6:
+        return 'Saturday';
+        break;
+      case 7:
+        return 'Sunday';
+        break;
       default:
-        return 'Monday';
+        return 'Day of week does not exist';
         break;
     }
   }
