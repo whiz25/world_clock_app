@@ -1,9 +1,9 @@
 import 'dart:async';
 
+import 'package:intl/intl.dart';
 import 'package:world_clock_app/api/city_time_client.dart';
 import 'package:world_clock_app/bloc/bloc.dart';
 import 'package:world_clock_app/bloc/city_time_state.dart';
-import 'package:world_clock_app/model/city_time_model.dart';
 
 class CityTimeBloc extends Bloc<CityTimeState> {
   final String url;
@@ -11,7 +11,7 @@ class CityTimeBloc extends Bloc<CityTimeState> {
 
   @override
   FutureOr<CityTimeState> loadInitialState() async {
-    CityTimeModel cityTime = await getCityTime(url: this.url);
+    Map<String, dynamic> cityTime = await getCityTime(url: this.url);
     return CityTimeState(cityTime: cityTime);
   }
 

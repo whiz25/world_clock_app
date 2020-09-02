@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:world_clock_app/bloc/bloc_provider.dart';
 import 'package:world_clock_app/bloc/city_time_bloc.dart';
 import 'package:world_clock_app/bloc/city_time_state.dart';
+import 'package:world_clock_app/ui/animation.dart';
 
 class CityTime extends StatefulWidget {
   final String url;
@@ -11,7 +12,10 @@ class CityTime extends StatefulWidget {
   State createState() => _CityTimeState();
 }
 
-class _CityTimeState extends State<CityTime> {
+class _CityTimeState extends State<CityTime>
+    with SingleTickerProviderStateMixin {
+  AnimationController animationController;
+  MainAnimation animation;
 
   CityTimeBloc bloc = CityTimeBloc();
 
@@ -19,6 +23,25 @@ class _CityTimeState extends State<CityTime> {
   void initState() {
     super.initState();
     bloc = CityTimeBloc(url: this.widget.url);
+
+    animationController = AnimationController(
+        duration: Duration(milliseconds: 2000), vsync: this);
+
+    animationController.forward();
+
+    animation = MainAnimation(animationController);
+    animationController.addListener(() {
+      setState(() {});
+    });
+
+    animationController.forward();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    animationController.dispose();
   }
 
   @override
@@ -27,11 +50,10 @@ class _CityTimeState extends State<CityTime> {
       bloc: bloc,
       builder: (context, state, bloc) {
         return Scaffold(
-          appBar: AppBar(
-            title: Text(bloc.url),
-          ),
-          body: _buildCityTime(context, state),
-        );
+            appBar: AppBar(
+              title: Text(bloc.url),
+            ),
+            body: _buildCityTime(context, state));
       },
     );
   }
@@ -43,23 +65,31 @@ class _CityTimeState extends State<CityTime> {
         children: [
           Text(
             _displayDatetime(state),
-            style: TextStyle(fontSize: 24.0),
+            style: TextStyle(fontSize: 45.0 * animation.dateAnimation.value),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: state.checkTimeOfDay()
-                ? Icon(
-                    Icons.wb_sunny,
-                    size: 80.0,
-                  )
-                : Icon(
-                    Icons.star,
-                    size: 80.0,
-                  ),
+                ? Transform.rotate(
+                    angle: animation.iconAnimation.value,
+                    child: Container(
+                      child: Icon(
+                        Icons.wb_sunny,
+                        size: 80.0,
+                      ),
+                    ))
+                : Transform.rotate(
+                    angle: animation.iconAnimation.value,
+                    child: Container(
+                      child: Icon(
+                        Icons.star,
+                        size: 80.0,
+                      ),
+                    )),
           ),
           Text(
-            state.cityTime.datetime.substring(11, 19),
-            style: TextStyle(fontSize: 24.0),
+            state.cityTime['datetime'].substring(11, 19),
+            style: TextStyle(fontSize: 45.0 * animation.timeAnimation.value),
           ),
         ],
       ),
@@ -67,6 +97,6 @@ class _CityTimeState extends State<CityTime> {
   }
 
   String _displayDatetime(CityTimeState state) {
-    return '${state.dayOfWeek}, ${state.dayOfMonth} ${state.monthOfYear}';
+    return '${state.checkDayOfWeek()}, ${state.dayOfMonth} ${state.monthOfYear}';
   }
 }
