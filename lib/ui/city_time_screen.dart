@@ -69,7 +69,7 @@ class _CityTimeState extends State<CityTime>
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: state.checkTimeOfDay()
+            child: state.checkTimeOfDay
                 ? Transform.rotate(
                     angle: animation.iconAnimation.value,
                     child: Container(
@@ -97,6 +97,6 @@ class _CityTimeState extends State<CityTime>
   }
 
   String _displayDatetime(CityTimeState state) {
-    return '${state.dayOfWeek()}, ${state.dayOfMonth} ${state.monthOfYear}';
+    return '${state.dayOfWeek}, ${state.dayOfMonth} ${state.monthOfYear}';
   }
 }

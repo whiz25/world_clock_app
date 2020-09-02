@@ -9,13 +9,15 @@ class CityTimeState {
     return CityTimeState(cityTime: cityTime ?? this.cityTime);
   }
 
-  String get dayOfMonth =>
-      DateFormat.d().format(DateTime.parse(cityTime['datetime']));
+  String get dayOfMonth {
+    String datetime = cityTime['datetime'];
+    return DateFormat.d().format(DateTime.parse(datetime));
+  }
 
   String get monthOfYear =>
       DateFormat.MMMM().format(DateTime.parse(cityTime['datetime']));
 
-  bool checkTimeOfDay() {
+  bool get checkTimeOfDay {
     String datetime = cityTime['datetime'];
     DateTime now = DateTime.parse(datetime);
     String hours = cityTime['utc_offset'].substring(0, 3);
@@ -25,7 +27,7 @@ class CityTimeState {
     return now.hour >= 8 && now.hour <= 20 ? true : false;
   }
 
-  String dayOfWeek() {
+  String get dayOfWeek {
     int now = cityTime['day_of_week'];
     switch (now) {
       case 1:
