@@ -20,7 +20,7 @@ class CityTimeState {
     return time.hour >= 8 && time.hour <= 20 ? true : false;
   }
 
-  String checkDayOfWeek() {
+  String dayOfWeek() {
     int now = cityTime['day_of_week'];
     switch (now) {
       case 1:

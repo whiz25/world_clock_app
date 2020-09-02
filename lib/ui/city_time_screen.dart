@@ -97,6 +97,6 @@ class _CityTimeState extends State<CityTime>
   }
 
   String _displayDatetime(CityTimeState state) {
-    return '${state.checkDayOfWeek()}, ${state.dayOfMonth} ${state.monthOfYear}';
+    return '${state.dayOfWeek()}, ${state.dayOfMonth} ${state.monthOfYear}';
   }
 }
