@@ -1,13 +1,14 @@
 class AppState {
-  final String datetime;
+  final Map<String, dynamic> datetime;
 
   AppState({this.datetime});
 
-  AppState copy({String datetime}) {
+  AppState copy({Map<String, dynamic> datetime}) {
     return AppState(datetime: datetime ?? this.datetime);
   }
 
-  static AppState initialState() => AppState(datetime: '00:00');
+  static AppState initialState() =>
+      AppState(datetime: {'datetime': '2020-09-04T20:01:16.651883+03:00'});
 
   @override
   bool operator ==(Object other) =>
