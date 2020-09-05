@@ -2,11 +2,25 @@ import 'package:intl/intl.dart';
 
 class CityTimeState {
   Map<String, dynamic> cityTime;
+  bool isTwentyFourHour;
+  int twelveHour;
 
-  CityTimeState({this.cityTime});
+  CityTimeState({
+    this.cityTime,
+    this.isTwentyFourHour,
+    this.twelveHour,
+  });
 
-  CityTimeState copyWith({Map<String, dynamic> cityTime}) {
-    return CityTimeState(cityTime: cityTime ?? this.cityTime);
+  CityTimeState copyWith({
+    Map<String, dynamic> cityTime,
+    bool isTwentyFourHour,
+    int twelveHour,
+  }) {
+    return CityTimeState(
+      cityTime: cityTime ?? this.cityTime,
+      isTwentyFourHour: isTwentyFourHour ?? this.isTwentyFourHour,
+      twelveHour: twelveHour ?? this.twelveHour,
+    );
   }
 
   DateTime timeNow() {
@@ -19,6 +33,8 @@ class CityTimeState {
     return now;
   }
 
+  int get hourOfDay => timeNow().hour;
+
   String get dayOfMonth {
     return DateFormat.d().format(timeNow());
   }
@@ -28,6 +44,10 @@ class CityTimeState {
 
   bool get checkTimeOfDay {
     return timeNow().hour >= 8 && timeNow().hour <= 20 ? true : false;
+  }
+
+  bool get twentyFourHourFormat {
+    return timeNow().hour >= 12 ? true : false;
   }
 
   String get dayOfWeek {

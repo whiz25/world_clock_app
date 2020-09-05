@@ -11,6 +11,25 @@ class CityTimeBloc extends Bloc<CityTimeState> {
   @override
   FutureOr<CityTimeState> loadInitialState() async {
     Map<String, dynamic> cityTime = await getCityTime(url: this.url);
-    return CityTimeState(cityTime: cityTime);
+    return CityTimeState(cityTime: cityTime, isTwentyFourHour: true);
+  }
+
+  void convertTimeToTwelveHourFormat(int hour) {
+    if (state.isTwentyFourHour) {
+      var newTimeFormat = state.copyWith(
+          isTwentyFourHour: false, twelveHour: twelveHourFormat(hour));
+      newState(newTimeFormat);
+    } else {
+      var newTimeFormat = state.copyWith(isTwentyFourHour: true);
+      newState(newTimeFormat);
+    }
+  }
+
+  int twelveHourFormat(int hour) {
+    if (hour > 12) {
+      return hour - 12;
+    } else {
+      return hour;
+    }
   }
 }

@@ -50,10 +50,17 @@ class _CityTimeState extends State<CityTime>
       bloc: bloc,
       builder: (context, state, bloc) {
         return Scaffold(
-            appBar: AppBar(
-              title: Text(bloc.url),
-            ),
-            body: _buildCityTime(context, state));
+          appBar: AppBar(
+            title: Text(bloc.url),
+          ),
+          body: _buildCityTime(context, state),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              bloc.convertTimeToTwelveHourFormat(state.hourOfDay);
+            },
+            child: _twentyFourHourOrTwelveHourFormat(state),
+          ),
+        );
       },
     );
   }
@@ -87,10 +94,10 @@ class _CityTimeState extends State<CityTime>
                       ),
                     )),
           ),
-          Text(
-            state.cityTime['datetime'].substring(11, 19),
-            style: TextStyle(fontSize: 45.0 * animation.timeAnimation.value),
-          ),
+          state.isTwentyFourHour
+              ? Text('${state.cityTime['datetime'].substring(11, 19)}')
+              : Text(
+                  '${state.twelveHour}:${state.cityTime['datetime'].substring(14, 19)}'),
         ],
       ),
     );
@@ -98,5 +105,19 @@ class _CityTimeState extends State<CityTime>
 
   String _displayDatetime(CityTimeState state) {
     return '${state.dayOfWeek}, ${state.dayOfMonth} ${state.monthOfYear}';
+  }
+
+  Widget _twentyFourHourOrTwelveHourFormat(CityTimeState state) {
+    if (state.isTwentyFourHour) {
+      return Text(
+        '12H',
+        style: TextStyle(fontSize: 24.0),
+      );
+    } else {
+      return Text(
+        '24H',
+        style: TextStyle(fontSize: 24.0),
+      );
+    }
   }
 }
