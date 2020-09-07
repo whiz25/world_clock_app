@@ -51,16 +51,16 @@ class _ListRegionsState extends State<ListRegions> {
                     children: [
                       Text(
                         'Local Time',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
                       ),
                       state.isTwentyFourHour
                           ? Text(
                               '${state.getLocalTime}',
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
                             )
                           : Text(
                               '${state.twelveHourFormat}',
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
                             ),
                       SizedBox(
                         height: 500,
