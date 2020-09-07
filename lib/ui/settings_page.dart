@@ -12,33 +12,53 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
-  bool val = false;
-  onSwitchValueChanged(bool newVal) {
-    setState(() {
-      val = newVal;
-    });
-  }
-
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Settings'),
       ),
       body: Center(
-          child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('Change time format: ', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),),
-              Text('12Hr'),
-              ToggleTimeConnector(),
-              Text('24Hr'),
-            ],
-          ),
-          Text(''),
-        ],
-      )),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text('12Hr'),
+                ToggleTimeConnector(),
+                Text('24Hr'),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text('Choose start of day:'),
+                _selectStartOfDayTime(context),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text('Choose end of day:'),
+                _selectEndOfDayTime(context),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
+  }
+
+  IconButton _selectStartOfDayTime(BuildContext context) {
+    return IconButton(
+        icon: Icon(Icons.alarm), onPressed: () => _showTimePicker(context));
+  }
+
+  IconButton _selectEndOfDayTime(BuildContext context) {
+    return IconButton(
+        icon: Icon(Icons.alarm), onPressed: () => _showTimePicker(context));
+  }
+
+  Future<TimeOfDay> _showTimePicker(BuildContext context) async {
+    return await showTimePicker(context: context, initialTime: TimeOfDay.now());
   }
 }
