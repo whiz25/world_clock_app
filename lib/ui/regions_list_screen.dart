@@ -1,22 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:world_clock_app/async_redux/store/app_state.dart';
 import 'package:world_clock_app/bloc/bloc_provider.dart';
 import 'package:world_clock_app/bloc/region_bloc.dart';
 import 'package:world_clock_app/bloc/region_state.dart';
 import 'package:world_clock_app/ui/timezones_list_screen.dart';
 
 class ListRegions extends StatefulWidget {
+  final String localTime;
+  final String cityTime;
+  final bool isTwentyFourHour;
+  final List<String> regions;
+  final VoidCallback onChangeTimeFormat;
+
+  const ListRegions(
+      {Key key,
+      this.localTime,
+      this.cityTime,
+      this.isTwentyFourHour,
+      this.regions,
+      this.onChangeTimeFormat})
+      : super(key: key);
+
   @override
   State createState() => _ListRegionsState();
 }
 
 class _ListRegionsState extends State<ListRegions> {
   RegionBloc bloc = RegionBloc();
-
   @override
   void initState() {
-    bloc = RegionBloc();
-
     super.initState();
+
+    bloc = RegionBloc();
   }
 
   @override
@@ -38,13 +53,17 @@ class _ListRegionsState extends State<ListRegions> {
                         'Local Time',
                         style: TextStyle(),
                       ),
-                      Text(state.getLocalTime),
+                      Text('${DateTime.now().toString().substring(11,19)}'),
                       SizedBox(
                         height: 570,
                         child: _buildList(context, state),
                       )
                     ],
                   )),
+            ),
+            floatingActionButton: FloatingActionButton(
+              onPressed: this.widget.onChangeTimeFormat,
+              child: _twelveOrTwentyFourHour(),
             ),
           );
         });
@@ -67,5 +86,19 @@ class _ListRegionsState extends State<ListRegions> {
             ),
           );
         });
+  }
+
+  Widget _twelveOrTwentyFourHour() {
+    if (true) {
+      return Text(
+        '24H',
+        style: TextStyle(fontSize: 20.0),
+      );
+    } else {
+      return Text(
+        '12H',
+        style: TextStyle(fontSize: 20.0),
+      );
+    }
   }
 }

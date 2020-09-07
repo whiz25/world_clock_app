@@ -46,8 +46,8 @@ class CityTimeState {
     return timeNow().hour >= 8 && timeNow().hour <= 20 ? true : false;
   }
 
-  bool get twentyFourHourFormat {
-    return timeNow().hour >= 12 ? true : false;
+  String get twentyFourHourFormat {
+    return DateFormat.jm().format(timeNow());
   }
 
   String get dayOfWeek {

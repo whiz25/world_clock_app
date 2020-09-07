@@ -95,9 +95,16 @@ class _CityTimeState extends State<CityTime>
                     )),
           ),
           state.isTwentyFourHour
-              ? Text('${state.cityTime['datetime'].substring(11, 19)}')
+              ? Text(
+                  '${state.twentyFourHourFormat}',
+                  style:
+                      TextStyle(fontSize: 45.0 * animation.timeAnimation.value),
+                )
               : Text(
-                  '${state.twelveHour}:${state.cityTime['datetime'].substring(14, 19)}'),
+                  '${state.cityTime['datetime'].substring(11, 16)}',
+                  style:
+                      TextStyle(fontSize: 45.0 * animation.timeAnimation.value),
+                ),
         ],
       ),
     );
@@ -110,13 +117,13 @@ class _CityTimeState extends State<CityTime>
   Widget _twentyFourHourOrTwelveHourFormat(CityTimeState state) {
     if (state.isTwentyFourHour) {
       return Text(
-        '12H',
-        style: TextStyle(fontSize: 24.0),
+        '24H',
+        style: TextStyle(fontSize: 20.0),
       );
     } else {
       return Text(
-        '24H',
-        style: TextStyle(fontSize: 24.0),
+        '12H',
+        style: TextStyle(fontSize: 20.0),
       );
     }
   }

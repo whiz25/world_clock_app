@@ -1,11 +1,15 @@
 import 'dart:convert';
+import 'package:intl/intl.dart';
 
 import 'package:async_redux/async_redux.dart';
-import 'package:intl/intl.dart';
-import 'package:http/http.dart' as http;
 import 'package:world_clock_app/async_redux/store/app_state.dart';
+import 'package:http/http.dart' as http;
 
-class ChangeTimeFormatAction extends ReduxAction<AppState> {
+class GreetingAction extends ReduxAction<AppState> {
+  final String hour;
+
+  GreetingAction({this.hour});
+
   @override
   Future<AppState> reduce() async {
     final response =
@@ -27,9 +31,10 @@ class ChangeTimeFormatAction extends ReduxAction<AppState> {
             isTwentyFourHour: false);
       } else {
         return state.copy(
-            cityTime: formatTime(parseDateTime(now.toString())),
+            cityTime: DateFormat.jm().format(parseDateTime(now.toString())),
             isTwentyFourHour: true,
-            localTime: formatTime(parseDateTime(DateTime.now().toString())));
+            localTime: DateFormat.jm()
+                .format(parseDateTime(DateTime.now().toString())));
       }
     }
   }
@@ -38,7 +43,6 @@ class ChangeTimeFormatAction extends ReduxAction<AppState> {
     return DateTime.parse(time);
   }
 
-  String formatTime(DateTime time) {
-    return DateFormat.jm().format(time);
-  }
+  
+
 }

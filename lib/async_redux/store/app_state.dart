@@ -1,22 +1,38 @@
 class AppState {
-  Map<String, dynamic> cityTime;
+  String cityTime;
   bool isTwentyFourHour;
   int twelveHour;
+  String localTime;
+  List<String> regions;
 
-  AppState({this.cityTime, this.isTwentyFourHour, this.twelveHour});
+  AppState(
+      {this.cityTime,
+      this.isTwentyFourHour,
+      this.twelveHour,
+      this.localTime,
+      this.regions});
 
   AppState copy(
-      {Map<String, dynamic> cityTime, bool isTwentyFourHour, int twelveHour}) {
+      {String cityTime,
+      bool isTwentyFourHour,
+      int twelveHour,
+      String localTime,
+      List<String> regions}) {
     return AppState(
         cityTime: cityTime ?? this.cityTime,
         isTwentyFourHour: isTwentyFourHour ?? this.isTwentyFourHour,
-        twelveHour: twelveHour ?? this.twelveHour);
+        twelveHour: twelveHour ?? this.twelveHour,
+        localTime: localTime ?? this.localTime,
+        regions: regions ?? this.regions);
   }
 
-  static AppState initialState() => AppState(
-      cityTime: {'datetime': '2020-09-05T22:12:02.110823+03:00'},
-      isTwentyFourHour: false,
-      twelveHour: 12);
+  static AppState initialState() {
+    return AppState(
+        cityTime: '2020-07-20T18:15:12'.substring(11, 16),
+        isTwentyFourHour: false,
+        localTime: DateTime.now().toString().substring(11, 16),
+        regions: []);
+  }
 
   @override
   bool operator ==(Object other) =>
@@ -25,9 +41,15 @@ class AppState {
           runtimeType == other.runtimeType &&
           cityTime == other.cityTime &&
           isTwentyFourHour == other.isTwentyFourHour &&
-          twelveHour == other.twelveHour;
+          twelveHour == other.twelveHour &&
+          localTime == other.localTime &&
+          regions == other.regions;
 
   @override
   int get hashCode =>
-      cityTime.hashCode ^ isTwentyFourHour.hashCode ^ twelveHour.hashCode;
+      cityTime.hashCode ^
+      isTwentyFourHour.hashCode ^
+      twelveHour.hashCode ^
+      localTime.hashCode ^
+      regions.hashCode;
 }
