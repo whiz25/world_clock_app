@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:world_clock_app/async_redux/connector/time_connector.dart';
+import 'package:world_clock_app/async_redux/connector/time_format_selector.dart';
 import 'package:world_clock_app/bloc/bloc_provider.dart';
 import 'package:world_clock_app/bloc/city_time_bloc.dart';
 import 'package:world_clock_app/bloc/city_time_state.dart';
@@ -50,17 +52,11 @@ class _CityTimeState extends State<CityTime>
       bloc: bloc,
       builder: (context, state, bloc) {
         return Scaffold(
-          appBar: AppBar(
-            title: Text(bloc.url),
-          ),
-          body: _buildCityTime(context, state),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              bloc.convertTimeToTwelveHourFormat();
-            },
-            child: _twentyFourHourOrTwelveHourFormat(state),
-          ),
-        );
+            appBar: AppBar(
+              title: Text(bloc.url),
+            ),
+            body: _buildCityTime(context, state),
+            floatingActionButton: TimeFormatSelector());
       },
     );
   }
@@ -94,17 +90,11 @@ class _CityTimeState extends State<CityTime>
                       ),
                     )),
           ),
-          state.isTwentyFourHour
-              ? Text(
-                  '${state.twelveHourFormat}',
-                  style:
-                      TextStyle(fontSize: 45.0 * animation.timeAnimation.value),
-                )
-              : Text(
-                  '${state.cityTime['datetime'].substring(11, 16)}',
-                  style:
-                      TextStyle(fontSize: 45.0 * animation.timeAnimation.value),
-                ),
+          TimeConnector(
+            state.timeNow(),
+            textStyle:
+                TextStyle(fontSize: 45.0 * animation.timeAnimation.value),
+          )
         ],
       ),
     );

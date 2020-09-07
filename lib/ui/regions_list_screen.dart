@@ -1,26 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:world_clock_app/async_redux/connector/time_connector.dart';
+import 'package:world_clock_app/async_redux/connector/time_format_selector.dart';
 import 'package:world_clock_app/bloc/bloc_provider.dart';
-import 'package:world_clock_app/bloc/city_time_state.dart';
 import 'package:world_clock_app/bloc/region_bloc.dart';
 import 'package:world_clock_app/bloc/region_state.dart';
+import 'package:world_clock_app/ui/settings_page.dart';
 import 'package:world_clock_app/ui/timezones_list_screen.dart';
 
 class ListRegions extends StatefulWidget {
-  final String localTime;
-  final String cityTime;
-  final bool isTwentyFourHour;
-  final List<String> regions;
-  final VoidCallback onChangeTimeFormat;
-
-  const ListRegions(
-      {Key key,
-      this.localTime,
-      this.cityTime,
-      this.isTwentyFourHour,
-      this.regions,
-      this.onChangeTimeFormat})
-      : super(key: key);
-
   @override
   State createState() => _ListRegionsState();
 }
@@ -42,23 +29,23 @@ class _ListRegionsState extends State<ListRegions> {
           return Scaffold(
             appBar: AppBar(
               title: Center(child: Text('Regions')),
+              actions: [
+                IconButton(
+                  icon: Icon(Icons.settings),
+                  onPressed: () => Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => Settings())),
+                )
+              ],
             ),
             body: SingleChildScrollView(
               child: Container(
                   height: 1000.0,
-                  margin: EdgeInsets.symmetric(vertical: 10.0),
                   child: Column(
                     children: [
                       Text(
                         'Local Time',
                       ),
-                      state.isTwentyFourHour
-                          ? Text(
-                              '${state.getLocalTime}',
-                            )
-                          : Text(
-                              '${state.twelveHourFormat}',
-                            ),
+                      TimeConnector(DateTime.now()),
                       SizedBox(
                         height: 500,
                         child: _buildList(context, state),
@@ -66,19 +53,13 @@ class _ListRegionsState extends State<ListRegions> {
                     ],
                   )),
             ),
-            floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                bloc.convertTimeToTwelveHourFormat();
-              },
-              child: _twentyFourHourOrTwelveHourFormat(state),
-            ),
+            floatingActionButton: TimeFormatSelector(),
           );
         });
   }
 
   Widget _buildList(BuildContext context, RegionState state) {
     return ListView.builder(
-        padding: const EdgeInsets.all(16.0),
         itemCount: state.regions.regions.length,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
@@ -98,19 +79,5 @@ class _ListRegionsState extends State<ListRegions> {
             ),
           );
         });
-  }
-
-  Widget _twentyFourHourOrTwelveHourFormat(RegionState state) {
-    if (state.isTwentyFourHour) {
-      return Text(
-        '12H',
-        style: TextStyle(fontSize: 20.0),
-      );
-    } else {
-      return Text(
-        '24H',
-        style: TextStyle(fontSize: 20.0),
-      );
-    }
   }
 }

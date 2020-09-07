@@ -13,16 +13,4 @@ class CityTimeBloc extends Bloc<CityTimeState> {
     Map<String, dynamic> cityTime = await getCityTime(url: this.url);
     return CityTimeState(cityTime: cityTime, isTwentyFourHour: true);
   }
-
-  void convertTimeToTwelveHourFormat() {
-    if (state.isTwentyFourHour) {
-      var newTimeFormat = state.copyWith(
-        isTwentyFourHour: false,
-      );
-      newState(newTimeFormat);
-    } else {
-      var newTimeFormat = state.copyWith(isTwentyFourHour: true);
-      newState(newTimeFormat);
-    }
-  }
 }
