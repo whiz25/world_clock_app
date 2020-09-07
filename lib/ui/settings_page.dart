@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:world_clock_app/async_redux/connector/time_format_selector.dart';
 import 'package:world_clock_app/async_redux/connector/toggle_time_connector.dart';
 
 class Settings extends StatefulWidget {
@@ -31,12 +30,13 @@ class _SettingsState extends State<Settings> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Text('Change time format: ', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),),
               Text('12Hr'),
               ToggleTimeConnector(),
               Text('24Hr'),
             ],
           ),
-          Text('Settings page...'),
+          Text(''),
         ],
       )),
     );
