@@ -53,7 +53,6 @@ class _ListRegionsState extends State<ListRegions> {
                     ],
                   )),
             ),
-            floatingActionButton: TimeFormatSelector(),
           );
         });
   }

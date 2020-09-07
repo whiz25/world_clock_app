@@ -52,11 +52,11 @@ class _CityTimeState extends State<CityTime>
       bloc: bloc,
       builder: (context, state, bloc) {
         return Scaffold(
-            appBar: AppBar(
-              title: Text(bloc.url),
-            ),
-            body: _buildCityTime(context, state),
-            floatingActionButton: TimeFormatSelector());
+          appBar: AppBar(
+            title: Text(bloc.url),
+          ),
+          body: _buildCityTime(context, state),
+        );
       },
     );
   }
@@ -102,19 +102,5 @@ class _CityTimeState extends State<CityTime>
 
   String _displayDatetime(CityTimeState state) {
     return '${state.dayOfWeek}, ${state.dayOfMonth} ${state.monthOfYear}';
-  }
-
-  Widget _twentyFourHourOrTwelveHourFormat(CityTimeState state) {
-    if (state.isTwentyFourHour) {
-      return Text(
-        '24H',
-        style: TextStyle(fontSize: 20.0),
-      );
-    } else {
-      return Text(
-        '12H',
-        style: TextStyle(fontSize: 20.0),
-      );
-    }
   }
 }
