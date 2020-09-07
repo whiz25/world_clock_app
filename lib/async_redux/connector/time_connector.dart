@@ -10,11 +10,7 @@ class TimeConnector extends StatelessWidget {
     return StoreConnector<AppState, TimeModel>(
       model: TimeModel(),
       builder: (BuildContext context, TimeModel vm) => ListRegions(
-        localTime: vm.localTime,
-        cityTime: vm.cityTime,
         isTwentyFourHour: vm.isTwentyFourHour,
-        regions: vm.regions,
-        onChangeTimeFormat: vm.onChangeTimeFormat,
       ),
     );
   }
