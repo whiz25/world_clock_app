@@ -13,7 +13,7 @@ class RegionState {
         isTwentyFourHour: isTwentyFourHour ?? this.isTwentyFourHour);
   }
 
-  String get getLocalTime => DateFormat.Hms().format(DateTime.now());
+  String get getLocalTime => DateTime.now().toString().substring(11, 16);
 
   String get twelveHourFormat {
     return DateFormat.jm().format(DateTime.now());

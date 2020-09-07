@@ -3,7 +3,6 @@ import 'package:flutter/widgets.dart';
 import 'package:world_clock_app/async_redux/store/app_state.dart';
 import 'package:world_clock_app/async_redux/view%20model/time_model.dart';
 import 'package:world_clock_app/ui/regions_list_screen.dart';
-import 'package:world_clock_app/ui/test_ui.dart';
 
 class TimeConnector extends StatelessWidget {
   @override

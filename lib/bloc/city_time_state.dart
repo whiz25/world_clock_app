@@ -75,7 +75,7 @@ class CityTimeState {
         return 'Sunday';
         break;
       default:
-        return 'Day of week does not exist';
+        return 'Monday';
         break;
     }
   }
