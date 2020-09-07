@@ -11,7 +11,17 @@ class RegionBloc extends Bloc<RegionState> {
   FutureOr<RegionState> loadInitialState() async {
     RegionClient regionClient = RegionClient();
     RegionModel regions = await regionClient.loadRegions();
-    return RegionState(regions: regions);
+    return RegionState(regions: regions, isTwentyFourHour: true);
   }
 
+  void convertTimeToTwelveHourFormat() {
+    if (state.isTwentyFourHour) {
+      var newTimeFormat = state.copyWith(
+          isTwentyFourHour: false);
+      newState(newTimeFormat);
+    } else {
+      var newTimeFormat = state.copyWith(isTwentyFourHour: true);
+      newState(newTimeFormat);
+    }
+  }
 }

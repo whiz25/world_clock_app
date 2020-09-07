@@ -14,22 +14,15 @@ class CityTimeBloc extends Bloc<CityTimeState> {
     return CityTimeState(cityTime: cityTime, isTwentyFourHour: true);
   }
 
-  void convertTimeToTwelveHourFormat(int hour) {
+  void convertTimeToTwelveHourFormat() {
     if (state.isTwentyFourHour) {
       var newTimeFormat = state.copyWith(
-          isTwentyFourHour: false, twelveHour: twelveHourFormat(hour));
+        isTwentyFourHour: false,
+      );
       newState(newTimeFormat);
     } else {
       var newTimeFormat = state.copyWith(isTwentyFourHour: true);
       newState(newTimeFormat);
-    }
-  }
-
-  int twelveHourFormat(int hour) {
-    if (hour > 12) {
-      return hour - 12;
-    } else {
-      return hour;
     }
   }
 }

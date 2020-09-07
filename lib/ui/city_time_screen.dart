@@ -56,7 +56,7 @@ class _CityTimeState extends State<CityTime>
           body: _buildCityTime(context, state),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              bloc.convertTimeToTwelveHourFormat(state.hourOfDay);
+              bloc.convertTimeToTwelveHourFormat();
             },
             child: _twentyFourHourOrTwelveHourFormat(state),
           ),
@@ -96,7 +96,7 @@ class _CityTimeState extends State<CityTime>
           ),
           state.isTwentyFourHour
               ? Text(
-                  '${state.twentyFourHourFormat}',
+                  '${state.twelveHourFormat}',
                   style:
                       TextStyle(fontSize: 45.0 * animation.timeAnimation.value),
                 )

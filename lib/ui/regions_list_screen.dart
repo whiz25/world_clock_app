@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:world_clock_app/async_redux/store/app_state.dart';
 import 'package:world_clock_app/bloc/bloc_provider.dart';
+import 'package:world_clock_app/bloc/city_time_state.dart';
 import 'package:world_clock_app/bloc/region_bloc.dart';
 import 'package:world_clock_app/bloc/region_state.dart';
 import 'package:world_clock_app/ui/timezones_list_screen.dart';
@@ -51,19 +51,29 @@ class _ListRegionsState extends State<ListRegions> {
                     children: [
                       Text(
                         'Local Time',
-                        style: TextStyle(),
+                        style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      Text('${DateTime.now().toString().substring(11,19)}'),
+                      state.isTwentyFourHour
+                          ? Text(
+                              '${state.getLocalTime}',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            )
+                          : Text(
+                              '${state.twelveHourFormat}',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
                       SizedBox(
-                        height: 570,
+                        height: 500,
                         child: _buildList(context, state),
                       )
                     ],
                   )),
             ),
             floatingActionButton: FloatingActionButton(
-              onPressed: this.widget.onChangeTimeFormat,
-              child: _twelveOrTwentyFourHour(),
+              onPressed: () {
+                bloc.convertTimeToTwelveHourFormat();
+              },
+              child: _twentyFourHourOrTwelveHourFormat(state),
             ),
           );
         });
@@ -76,6 +86,11 @@ class _ListRegionsState extends State<ListRegions> {
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
             title: Text(state.regions.regions[index]),
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) =>
+                      TimezoneList(region: state.regions.regions[index])));
+            },
             trailing: IconButton(
               icon: Icon(Icons.arrow_forward_ios),
               onPressed: () {
@@ -88,15 +103,15 @@ class _ListRegionsState extends State<ListRegions> {
         });
   }
 
-  Widget _twelveOrTwentyFourHour() {
-    if (true) {
+  Widget _twentyFourHourOrTwelveHourFormat(RegionState state) {
+    if (state.isTwentyFourHour) {
       return Text(
-        '24H',
+        '12H',
         style: TextStyle(fontSize: 20.0),
       );
     } else {
       return Text(
-        '12H',
+        '24H',
         style: TextStyle(fontSize: 20.0),
       );
     }
