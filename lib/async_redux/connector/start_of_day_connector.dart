@@ -1,5 +1,6 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:world_clock_app/async_redux/store/app_state.dart';
 import 'package:world_clock_app/async_redux/view%20model/time_model.dart';
 
@@ -9,25 +10,66 @@ class StartDayConnector extends StatelessWidget {
     return StoreConnector<AppState, TimeModel>(
         model: TimeModel(),
         builder: (BuildContext context, TimeModel vm) =>
-            _row(context, vm.startOfDay.format(context)));
+            _raisedButton(context, vm.startOfDay.format(context), vm));
   }
 
-  Row _row(BuildContext context, model) {
-    return Row(
-      children: [_startOfDay(model), _selectStartOfDayTime(context)],
+  Widget _raisedButton(BuildContext context, startOfDay, model) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: RaisedButton(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+        elevation: 4.0,
+        onPressed: () {
+          DatePicker.showTimePicker(context,
+              theme: DatePickerTheme(
+                containerHeight: 210.0,
+              ),
+              showTitleActions: true, onConfirm: (time) {
+            print('confirm $time');
+            startOfDay = '${time.hour} : ${time.minute} : ${time.second}';
+            model.startOfDayPicker();
+          }, currentTime: DateTime.now(), locale: LocaleType.en);
+        },
+        child: Container(
+          alignment: Alignment.center,
+          height: 50.0,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Container(
+                    child: Row(
+                      children: <Widget>[
+                        Icon(
+                          Icons.access_time,
+                          size: 18.0,
+                          color: Colors.blue,
+                        ),
+                        Text(
+                          ' Start: $startOfDay',
+                          style: TextStyle(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18.0),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+              Text(
+                "  Change",
+                style: TextStyle(
+                    color: Colors.blue,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18.0),
+              ),
+            ],
+          ),
+        ),
+        color: Colors.white,
+      ),
     );
-  }
-
-  Text _startOfDay(String value) {
-    return Text('Start of day: $value');
-  }
-
-  IconButton _selectStartOfDayTime(BuildContext context) {
-    return IconButton(
-        icon: Icon(Icons.edit), onPressed: () => _showTimePicker(context));
-  }
-
-  Future<TimeOfDay> _showTimePicker(BuildContext context) async {
-    return await showTimePicker(context: context, initialTime: TimeOfDay.now());
   }
 }

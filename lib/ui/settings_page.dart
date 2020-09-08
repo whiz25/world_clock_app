@@ -22,26 +22,9 @@ class _SettingsState extends State<Settings> {
       body: Center(
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('12Hr'),
-                ToggleTimeConnector(),
-                Text('24Hr'),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                StartDayConnector(),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                EndDayConnector(),
-              ],
-            ),
+            ToggleTimeConnector(),
+            StartDayConnector(),
+            EndDayConnector(),
           ],
         ),
       ),
