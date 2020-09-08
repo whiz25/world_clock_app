@@ -9,10 +9,25 @@ class EndDayConnector extends StatelessWidget {
     return StoreConnector<AppState, TimeModel>(
         model: TimeModel(),
         builder: (BuildContext context, TimeModel vm) =>
-            _endOfDay(vm.endOfDay.format(context)));
+            _row(context, vm.endOfDay.format(context)));
+  }
+
+  Row _row(BuildContext context, model) {
+    return Row(
+      children: [_endOfDay(model), _selectEndOfDayTime(context)],
+    );
   }
 
   Text _endOfDay(String value) {
-    return Text(value.toString());
+    return Text('Start of day: $value');
+  }
+
+  IconButton _selectEndOfDayTime(BuildContext context) {
+    return IconButton(
+        icon: Icon(Icons.edit), onPressed: () => _showTimePicker(context));
+  }
+
+  Future<TimeOfDay> _showTimePicker(BuildContext context) async {
+    return await showTimePicker(context: context, initialTime: TimeOfDay.now());
   }
 }

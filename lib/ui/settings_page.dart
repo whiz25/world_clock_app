@@ -33,36 +33,18 @@ class _SettingsState extends State<Settings> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Start of day: '),
                 StartDayConnector(),
-                _selectStartOfDayTime(context),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('End of day: '),
                 EndDayConnector(),
-                _selectEndOfDayTime(context),
               ],
             ),
           ],
         ),
       ),
     );
-  }
-
-  IconButton _selectStartOfDayTime(BuildContext context) {
-    return IconButton(
-        icon: Icon(Icons.edit), onPressed: () => _showTimePicker(context));
-  }
-
-  IconButton _selectEndOfDayTime(BuildContext context) {
-    return IconButton(
-        icon: Icon(Icons.edit), onPressed: () => _showTimePicker(context));
-  }
-
-  Future<TimeOfDay> _showTimePicker(BuildContext context) async {
-    return await showTimePicker(context: context, initialTime: TimeOfDay.now());
   }
 }
