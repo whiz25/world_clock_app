@@ -1,5 +1,4 @@
 import 'package:async_redux/async_redux.dart';
-import 'package:flutter/material.dart';
 import 'package:world_clock_app/async_redux/action/change_format_action.dart';
 import 'package:world_clock_app/async_redux/action/end_of_day_actions.dart';
 import 'package:world_clock_app/async_redux/action/start_of_day_action.dart';
@@ -9,8 +8,8 @@ import 'package:world_clock_app/main.dart';
 
 class TimeModel extends BaseModel<AppState> {
   final bool isTwentyFourHour;
-  final TimeOfDay startOfDay;
-  final TimeOfDay endOfDay;
+  final DateTime startOfDay;
+  final DateTime endOfDay;
 
   TimeModel({this.isTwentyFourHour, this.startOfDay, this.endOfDay})
       : super(equals: [isTwentyFourHour, startOfDay, endOfDay]);

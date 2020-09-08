@@ -10,7 +10,7 @@ class StartDayConnector extends StatelessWidget {
     return StoreConnector<AppState, TimeModel>(
         model: TimeModel(),
         builder: (BuildContext context, TimeModel vm) =>
-            _raisedButton(context, vm.startOfDay.format(context), vm));
+            _raisedButton(context, vm.startOfDay, vm));
   }
 
   Widget _raisedButton(BuildContext context, startOfDay, model) {
@@ -26,9 +26,9 @@ class StartDayConnector extends StatelessWidget {
               ),
               showTitleActions: true, onConfirm: (time) {
             print('confirm $time');
-            startOfDay = '${time.hour} : ${time.minute} : ${time.second}';
+            startOfDay = '${time.hour} : ${time.minute}';
             model.startOfDayPicker();
-          }, currentTime: DateTime.now(), locale: LocaleType.en);
+          }, currentTime: startOfDay, locale: LocaleType.en);
         },
         child: Container(
           alignment: Alignment.center,
@@ -47,7 +47,7 @@ class StartDayConnector extends StatelessWidget {
                           color: Colors.blue,
                         ),
                         Text(
-                          ' Start: $startOfDay',
+                          ' Start: ${startOfDay.toString().substring(11,16)}',
                           style: TextStyle(
                               color: Colors.blue,
                               fontWeight: FontWeight.bold,

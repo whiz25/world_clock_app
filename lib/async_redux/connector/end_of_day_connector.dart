@@ -10,11 +10,10 @@ class EndDayConnector extends StatelessWidget {
     return StoreConnector<AppState, TimeModel>(
         model: TimeModel(),
         builder: (BuildContext context, TimeModel vm) =>
-            _raisedButton(context, vm.endOfDay.format(context)));
+            _raisedButton(context, vm.endOfDay));
   }
 
   Widget _raisedButton(BuildContext context, endOfDay) {
-    String _time = " End: $endOfDay";
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: RaisedButton(
@@ -27,7 +26,7 @@ class EndDayConnector extends StatelessWidget {
               ),
               showTitleActions: true, onConfirm: (time) {
             print('confirm $time');
-            _time = '${time.hour} : ${time.minute} : ${time.second}';
+            endOfDay = '${time.hour} : ${time.minute}';
           }, currentTime: DateTime.now(), locale: LocaleType.en);
         },
         child: Container(
@@ -47,7 +46,7 @@ class EndDayConnector extends StatelessWidget {
                           color: Colors.blue,
                         ),
                         Text(
-                          '$_time',
+                          ' End: ${endOfDay.toString().substring(11, 16)}',
                           style: TextStyle(
                               color: Colors.blue,
                               fontWeight: FontWeight.bold,

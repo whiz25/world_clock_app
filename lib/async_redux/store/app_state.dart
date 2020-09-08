@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 class AppState {
   final bool isTwentyFourHour;
-  final TimeOfDay startOfDay;
-  final TimeOfDay endOfDay;
+  final DateTime startOfDay;
+  final DateTime endOfDay;
 
   AppState({this.isTwentyFourHour, this.startOfDay, this.endOfDay});
 
   AppState copy(
-      {bool isTwentyFourHour, TimeOfDay startOfDay, TimeOfDay endOfDay}) {
+      {bool isTwentyFourHour, DateTime startOfDay, DateTime endOfDay}) {
     return AppState(
         isTwentyFourHour: isTwentyFourHour ?? this.isTwentyFourHour,
         startOfDay: startOfDay ?? this.startOfDay,
@@ -18,8 +18,8 @@ class AppState {
   static AppState initialState() {
     return AppState(
         isTwentyFourHour: false,
-        startOfDay: TimeOfDay.now(),
-        endOfDay: TimeOfDay.now());
+        startOfDay: DateTime.now(),
+        endOfDay: DateTime.now());
   }
 
   @override
