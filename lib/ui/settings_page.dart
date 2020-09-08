@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:world_clock_app/async_redux/connector/end_of_day_connector.dart';
+import 'package:world_clock_app/async_redux/connector/start_of_day_connector.dart';
 import 'package:world_clock_app/async_redux/connector/toggle_time_connector.dart';
 
 class Settings extends StatefulWidget {
@@ -21,7 +23,7 @@ class _SettingsState extends State<Settings> {
         child: Column(
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text('12Hr'),
                 ToggleTimeConnector(),
@@ -29,16 +31,18 @@ class _SettingsState extends State<Settings> {
               ],
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Choose start of day:'),
+                Text('Start of day: '),
+                StartDayConnector(),
                 _selectStartOfDayTime(context),
               ],
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Choose end of day:'),
+                Text('End of day: '),
+                EndDayConnector(),
                 _selectEndOfDayTime(context),
               ],
             ),
@@ -50,12 +54,12 @@ class _SettingsState extends State<Settings> {
 
   IconButton _selectStartOfDayTime(BuildContext context) {
     return IconButton(
-        icon: Icon(Icons.alarm), onPressed: () => _showTimePicker(context));
+        icon: Icon(Icons.edit), onPressed: () => _showTimePicker(context));
   }
 
   IconButton _selectEndOfDayTime(BuildContext context) {
     return IconButton(
-        icon: Icon(Icons.alarm), onPressed: () => _showTimePicker(context));
+        icon: Icon(Icons.edit), onPressed: () => _showTimePicker(context));
   }
 
   Future<TimeOfDay> _showTimePicker(BuildContext context) async {
