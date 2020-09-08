@@ -34,11 +34,11 @@ class TimeModel extends BaseModel<AppState> {
     store.dispatch(ChangeTimeFormatAction());
   }
 
-  void startOfDayPicker() {
-    store.dispatch(StartOfDayAction());
+  void setStartOfDay(DateTime newTime) {
+    store.dispatch(StartOfDayAction(newTime));
   }
 
-  void endOfDayPicker() {
-    store.dispatch(EndOfDayAction());
+  void setEndOfDay(DateTime newTime) {
+    store.dispatch(EndOfDayAction(newTime));
   }
 }

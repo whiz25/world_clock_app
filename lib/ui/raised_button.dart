@@ -2,22 +2,23 @@ import 'package:async_redux/async_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:world_clock_app/async_redux/view%20model/time_model.dart';
 
 class RaisedButtonPage extends StatelessWidget {
   final DateTime pickedTime;
-  final BaseModel model;
+  final Function(DateTime) onTimePicked;
   final String text;
 
-  const RaisedButtonPage({Key key, this.pickedTime, this.model, this.text})
+  const RaisedButtonPage(
+      {Key key, this.pickedTime, this.onTimePicked, this.text})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return _raisedButton(context, this.pickedTime, this.model, this.text);
+    return _raisedButton(context, this.pickedTime, this.text);
   }
 
-  Widget _raisedButton(
-      BuildContext context, DateTime pickedTime, BaseModel model, String text) {
+  Widget _raisedButton(BuildContext context, DateTime pickedTime, String text) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: RaisedButton(
@@ -28,10 +29,10 @@ class RaisedButtonPage extends StatelessWidget {
               theme: DatePickerTheme(
                 containerHeight: 210.0,
               ),
-              showTitleActions: true, onConfirm: (time) {
-            print('Picked time: ${time.hour}:${time.minute}');
-            pickedTime = time;
-          }, currentTime: pickedTime, locale: LocaleType.en);
+              showTitleActions: true,
+              onConfirm: onTimePicked,
+              currentTime: pickedTime,
+              locale: LocaleType.en);
         },
         child: Container(
           alignment: Alignment.center,

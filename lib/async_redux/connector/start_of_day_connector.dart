@@ -11,7 +11,7 @@ class StartDayConnector extends StatelessWidget {
         model: TimeModel(),
         builder: (BuildContext context, TimeModel vm) => RaisedButtonPage(
               pickedTime: vm.startOfDay,
-              model: vm,
+              onTimePicked: vm.setStartOfDay,
               text: ' Start: ${vm.startOfDay.toString().substring(11, 16)}',
             ));
   }

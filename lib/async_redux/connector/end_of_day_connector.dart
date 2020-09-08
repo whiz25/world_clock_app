@@ -11,7 +11,7 @@ class EndDayConnector extends StatelessWidget {
         model: TimeModel(),
         builder: (BuildContext context, TimeModel vm) => RaisedButtonPage(
               pickedTime: vm.endOfDay,
-              model: vm,
+              onTimePicked: vm.setEndOfDay,
               text: ' End: ${vm.endOfDay.toString().substring(11, 16)}',
             ));
   }
