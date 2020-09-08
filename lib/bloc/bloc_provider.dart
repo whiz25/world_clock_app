@@ -112,6 +112,7 @@ class BlocPresenter<T, U extends Bloc<T>> extends StatelessWidget {
 
   Widget loader() {
     return Container(
+      color: Colors.white,
       child: Center(
         child: CircularProgressIndicator(),
       ),

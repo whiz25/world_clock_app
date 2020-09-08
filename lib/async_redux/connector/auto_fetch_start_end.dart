@@ -10,26 +10,37 @@ class AutoFetchStartAndEnd extends StatelessWidget {
     return StoreConnector<AppState, TimeModel>(
         model: TimeModel(),
         builder: (BuildContext context, TimeModel vm) =>
-            _fetchStartAndEndValues());
+            _fetchStartAndEndValues(vm));
   }
 
-  Widget _fetchStartAndEndValues() {
+  Widget _fetchStartAndEndValues(TimeModel model) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: RaisedButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
         elevation: 4.0,
-        onPressed: () {},
+        onPressed: () {
+          model.autoSetStartAndEnd();
+        },
         child: Container(
           alignment: Alignment.center,
           height: 50.0,
           child: Container(
-            child: Text(
-              'Auto Fetch Start And End',
-              style: TextStyle(
+            child: Row(
+              children: [
+                Icon(
+                  Icons.access_time,
+                  size: 18.0,
                   color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18.0),
+                ),
+                Text(
+                  ' Auto Fetch Start And End',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18.0),
+                ),
+              ],
             ),
           ),
         ),

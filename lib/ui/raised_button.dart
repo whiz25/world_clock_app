@@ -1,8 +1,6 @@
-import 'package:async_redux/async_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:world_clock_app/async_redux/view%20model/time_model.dart';
 
 class RaisedButtonPage extends StatelessWidget {
   final DateTime pickedTime;
@@ -45,11 +43,6 @@ class RaisedButtonPage extends StatelessWidget {
                   Container(
                     child: Row(
                       children: <Widget>[
-                        Icon(
-                          Icons.access_time,
-                          size: 18.0,
-                          color: Colors.blue,
-                        ),
                         Text(
                           text,
                           style: TextStyle(
