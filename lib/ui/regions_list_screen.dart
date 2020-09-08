@@ -28,7 +28,7 @@ class _ListRegionsState extends State<ListRegions> {
         builder: (context, state, bloc) {
           return Scaffold(
             appBar: AppBar(
-              title: Center(child: Text('Regions')),
+              title: Text('Regions'),
               actions: [
                 IconButton(
                   icon: Icon(Icons.settings),
