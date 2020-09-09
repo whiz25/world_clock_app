@@ -44,7 +44,7 @@ class AutoFetchStartAndEnd extends StatelessWidget {
             ),
           ),
         ),
-        color: Colors.blue,
+        color: model.primaryColor,
       ),
     );
   }

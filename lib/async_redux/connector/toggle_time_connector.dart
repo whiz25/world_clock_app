@@ -27,19 +27,13 @@ class ToggleTimeConnector extends StatelessWidget {
             children: [
               Text(
                 '12Hr',
-                style: TextStyle(
-                    color: Colors.blue,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18.0),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
               ),
               Switch(
                   value: isTwentyFourHour,
                   onChanged: (isTwentyFourHour) => model.toggleTimeFormat()),
               Text('24Hr',
-                  style: TextStyle(
-                      color: Colors.blue,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18.0))
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0))
             ],
           ),
         ),

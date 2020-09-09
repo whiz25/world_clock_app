@@ -8,5 +8,8 @@ void main() {
   var state = AppState.initialState();
   store = Store<AppState>(initialState: state);
   runApp(StoreProvider<AppState>(
-      store: store, child: MaterialApp(home: ListRegions())));
+      store: store,
+      child: MaterialApp(
+          theme: ThemeData(primaryColor: state.primaryColor),
+          home: ListRegions())));
 }

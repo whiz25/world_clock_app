@@ -46,9 +46,7 @@ class RaisedButtonPage extends StatelessWidget {
                         Text(
                           text,
                           style: TextStyle(
-                              color: Colors.blue,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18.0),
+                              fontWeight: FontWeight.bold, fontSize: 18.0),
                         ),
                       ],
                     ),
@@ -57,10 +55,7 @@ class RaisedButtonPage extends StatelessWidget {
               ),
               Text(
                 "  Change",
-                style: TextStyle(
-                    color: Colors.blue,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18.0),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
               ),
             ],
           ),
