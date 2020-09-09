@@ -8,7 +8,7 @@ import 'package:world_clock_app/ui/animation.dart';
 
 class CityTime extends StatefulWidget {
   final String url;
-  CityTime({this.url});
+  CityTime(this.url);
 
   @override
   State createState() => _CityTimeState();
@@ -19,7 +19,7 @@ class _CityTimeState extends State<CityTime>
   AnimationController animationController;
   MainAnimation animation;
 
-  CityTimeBloc bloc = CityTimeBloc();
+  CityTimeBloc bloc;
 
   @override
   void initState() {
@@ -40,10 +40,10 @@ class _CityTimeState extends State<CityTime>
   }
 
   @override
-  void dispose() {
-    super.dispose();
-
+  void dispose() {    
     animationController.dispose();
+    bloc.dispose();
+    super.dispose();
   }
 
   @override

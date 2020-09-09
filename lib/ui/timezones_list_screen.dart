@@ -45,7 +45,7 @@ class _TimezoneListState extends State<TimezoneList> {
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => CityTime(
-                        url: state.timezones[index],
+                        state.timezones[index],
                       )));
             },
           );

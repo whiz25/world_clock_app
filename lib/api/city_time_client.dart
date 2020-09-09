@@ -1,6 +1,5 @@
 import 'dart:convert';
-
-import 'package:http/http.dart' as http;
+import 'package:world_clock_app/util/http_client.dart';
 
 final String _baseUrl = 'http://worldtimeapi.org/api/timezone';
 

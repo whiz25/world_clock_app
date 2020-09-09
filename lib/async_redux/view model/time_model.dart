@@ -8,7 +8,7 @@ import 'package:world_clock_app/async_redux/action/start_of_day_action.dart';
 import 'package:world_clock_app/async_redux/action/theme_toggle_action.dart';
 import 'package:world_clock_app/async_redux/store/app_state.dart';
 import 'package:intl/intl.dart';
-import 'package:world_clock_app/main.dart';
+import 'package:world_clock_app/async_redux/store/redux_store.dart';
 
 class TimeModel extends BaseModel<AppState> {
   final bool isTwentyFourHour;
