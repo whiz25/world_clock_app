@@ -13,11 +13,10 @@ class AutoFetchStartAndEndAction extends ReduxAction<AppState> {
     String startDateTime =
         jsonResponse['location']['time'][0]['sunrise']['time'];
     String endDateTime = jsonResponse['location']['time'][0]['sunset']['time'];
-    
+
     DateTime newStartOfDay = DateTime.parse(startDateTime);
     DateTime newEndOfDay = DateTime.parse(endDateTime);
 
-    print(jsonResponse['location']['time'][0]['sunset']['time']);
     return state.copy(startOfDay: newStartOfDay, endOfDay: newEndOfDay);
   }
 }

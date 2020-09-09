@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:world_clock_app/async_redux/connector/time_connector.dart';
-import 'package:world_clock_app/async_redux/connector/time_format_selector.dart';
 import 'package:world_clock_app/bloc/bloc_provider.dart';
 import 'package:world_clock_app/bloc/region_bloc.dart';
 import 'package:world_clock_app/bloc/region_state.dart';

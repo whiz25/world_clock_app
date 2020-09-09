@@ -32,7 +32,7 @@ class AppState {
       isTwentyFourHour: false,
       startOfDay: DateTime.now(),
       endOfDay: DateTime.now(),
-      primaryColor: Colors.redAccent,
+      primaryColor: Colors.purple,
     );
   }
 

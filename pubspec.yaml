@@ -32,6 +32,7 @@ dependencies:
   intl: ^0.16.0
   async_redux: ^3.0.5
   flutter_datetime_picker: ^1.4.0
+  flutter_colorpicker: ^0.3.4
 
 dev_dependencies:
   flutter_test:
