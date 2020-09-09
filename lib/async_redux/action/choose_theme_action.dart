@@ -9,6 +9,6 @@ class ColorThemeAction extends ReduxAction<AppState> {
 
   @override
   Future<AppState> reduce() async {
-    return state.copy(primaryColor: newPrimaryColor);
+    return state;
   }
 }

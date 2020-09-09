@@ -10,10 +10,10 @@ class AutoFetchStartAndEnd extends StatelessWidget {
     return StoreConnector<AppState, TimeModel>(
         model: TimeModel(),
         builder: (BuildContext context, TimeModel vm) =>
-            _fetchStartAndEndValues(vm));
+            _fetchStartAndEndValues(vm, context));
   }
 
-  Widget _fetchStartAndEndValues(TimeModel model) {
+  Widget _fetchStartAndEndValues(TimeModel model, BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: RaisedButton(
@@ -44,7 +44,7 @@ class AutoFetchStartAndEnd extends StatelessWidget {
             ),
           ),
         ),
-        color: model.primaryColor,
+        color: Theme.of(context).primaryColor,
       ),
     );
   }

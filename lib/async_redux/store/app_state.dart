@@ -4,36 +4,36 @@ class AppState {
   final bool isTwentyFourHour;
   final DateTime startOfDay;
   final DateTime endOfDay;
-  final Color primaryColor;
+  final bool lightOrDarkTheme;
 
-  AppState({
-    this.isTwentyFourHour,
-    this.startOfDay,
-    this.endOfDay,
-    this.primaryColor,
-  });
+  AppState(
+      {this.isTwentyFourHour,
+      this.startOfDay,
+      this.endOfDay,
+      this.lightOrDarkTheme,
+      });
 
-  AppState copy({
-    bool isTwentyFourHour,
-    DateTime startOfDay,
-    DateTime endOfDay,
-    Color primaryColor,
-  }) {
+  AppState copy(
+      {bool isTwentyFourHour,
+      DateTime startOfDay,
+      DateTime endOfDay,
+      bool lightOrDarkTheme,
+      }) {
     return AppState(
-      isTwentyFourHour: isTwentyFourHour ?? this.isTwentyFourHour,
-      startOfDay: startOfDay ?? this.startOfDay,
-      endOfDay: endOfDay ?? this.endOfDay,
-      primaryColor: primaryColor ?? this.primaryColor,
-    );
+        isTwentyFourHour: isTwentyFourHour ?? this.isTwentyFourHour,
+        startOfDay: startOfDay ?? this.startOfDay,
+        endOfDay: endOfDay ?? this.endOfDay,
+        lightOrDarkTheme: lightOrDarkTheme ?? this.lightOrDarkTheme,
+       );
   }
 
   static AppState initialState() {
     return AppState(
-      isTwentyFourHour: false,
-      startOfDay: DateTime.now(),
-      endOfDay: DateTime.now(),
-      primaryColor: Colors.purple,
-    );
+        isTwentyFourHour: false,
+        startOfDay: DateTime.now(),
+        endOfDay: DateTime.now(),
+        lightOrDarkTheme: true,
+        );
   }
 
   @override
@@ -43,12 +43,12 @@ class AppState {
           isTwentyFourHour == other.isTwentyFourHour &&
           startOfDay == other.startOfDay &&
           endOfDay == other.endOfDay &&
-          primaryColor == other.primaryColor;
+          lightOrDarkTheme == other.lightOrDarkTheme;
 
   @override
   int get hashCode =>
       isTwentyFourHour.hashCode ^
       startOfDay.hashCode ^
       endOfDay.hashCode ^
-      primaryColor.hashCode;
+      lightOrDarkTheme.hashCode;
 }

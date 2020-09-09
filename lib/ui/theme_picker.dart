@@ -23,7 +23,7 @@ class ThemePicker extends StatelessWidget {
                 contentPadding: const EdgeInsets.all(0.0),
                 content: SingleChildScrollView(
                   child: MaterialPicker(
-                    pickerColor: model.primaryColor,
+                    pickerColor: Colors.red,
                     onColorChanged: changeColor,
                     enableLabel: true,
                   ),
@@ -33,16 +33,24 @@ class ThemePicker extends StatelessWidget {
           );
         },
         child: Container(
-          alignment: Alignment.center,
-          height: 50.0,
-          child: Row(
-            children: [
-              Icon(Icons.color_lens, color: Colors.white,),
-              Text(' Change Theme Color',style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0, color: Colors.white),),
-            ],
-          )
-          ),
-          color: model.primaryColor,
+            alignment: Alignment.center,
+            height: 50.0,
+            child: Row(
+              children: [
+                Icon(
+                  Icons.color_lens,
+                  color: Colors.white,
+                ),
+                Text(
+                  ' Change Theme Color',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18.0,
+                      color: Colors.white),
+                ),
+              ],
+            )),
+        color: Theme.of(context).primaryColor,
       ),
     );
   }

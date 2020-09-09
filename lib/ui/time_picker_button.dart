@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:world_clock_app/async_redux/connector/time_connector.dart';
 
-class RaisedButtonPage extends StatelessWidget {
+class TimePickerButton extends StatelessWidget {
   final DateTime pickedTime;
   final Function(DateTime) onTimePicked;
   final String text;
 
-  const RaisedButtonPage(
+  const TimePickerButton(
       {Key key, this.pickedTime, this.onTimePicked, this.text})
       : super(key: key);
 
@@ -43,10 +44,9 @@ class RaisedButtonPage extends StatelessWidget {
                   Container(
                     child: Row(
                       children: <Widget>[
-                        Text(
-                          text,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 18.0),
+                        Text(text,),
+                        TimeConnector(
+                          pickedTime,
                         ),
                       ],
                     ),
@@ -55,12 +55,10 @@ class RaisedButtonPage extends StatelessWidget {
               ),
               Text(
                 "  Change",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
               ),
             ],
           ),
         ),
-        color: Colors.white,
       ),
     );
   }
