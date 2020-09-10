@@ -25,17 +25,16 @@ class AutoFetchStartAndEnd extends StatelessWidget {
         child: Container(
           alignment: Alignment.center,
           height: 50.0,
-          child: Container(
-            child: Row(
-              children: [
-                Icon(
-                  Icons.access_time,
-                ),
-                Text(
-                  ' Auto Fetch Start And End',
-                ),
-              ],
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.access_time,
+              ),
+              Text(
+                ' Auto Fetch Start And End',
+              ),
+            ],
           ),
         ),
         color: Theme.of(context).primaryColor,
