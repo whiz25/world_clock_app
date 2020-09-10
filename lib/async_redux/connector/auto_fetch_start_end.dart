@@ -30,15 +30,9 @@ class AutoFetchStartAndEnd extends StatelessWidget {
               children: [
                 Icon(
                   Icons.access_time,
-                  size: 18.0,
-                  color: Colors.white,
                 ),
                 Text(
                   ' Auto Fetch Start And End',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18.0),
                 ),
               ],
             ),

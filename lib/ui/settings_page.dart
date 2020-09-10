@@ -29,7 +29,7 @@ class _SettingsState extends State<Settings> {
             StartDayConnector(),
             EndDayConnector(),
             AutoFetchStartAndEnd(),
-            ColorThemeConnector(),
+            // ColorThemeConnector(),
             ThemeToggleConnector()
           ],
         ),

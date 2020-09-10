@@ -9,10 +9,10 @@ class ThemeToggleConnector extends StatelessWidget {
     return StoreConnector<AppState, TimeModel>(
         model: TimeModel(),
         builder: (BuildContext context, TimeModel vm) =>
-            _themeToggleMode(vm.lightOrDarkTheme, vm));
+            _themeToggleMode(context, vm.lightOrDarkTheme, vm));
   }
 
-  Widget _themeToggleMode(bool lightOrDarkTheme, model) {
+  Widget _themeToggleMode(BuildContext context, bool lightOrDarkTheme, TimeModel model) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: RaisedButton(
@@ -37,6 +37,7 @@ class ThemeToggleConnector extends StatelessWidget {
             ],
           ),
         ),
+        color: Theme.of(context).primaryColor,
       ),
     );
   }

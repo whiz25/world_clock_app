@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class AppState {
   final bool isTwentyFourHour;
   final DateTime startOfDay;
