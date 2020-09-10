@@ -12,7 +12,7 @@ class EndDayConnector extends StatelessWidget {
         builder: (BuildContext context, TimeModel vm) => TimePickerButton(
               pickedTime: vm.endOfDay,
               onTimePicked: vm.setEndOfDay,
-              text: ' Sunset: ',
+              timePickerButtonText: ' Sunset: ',
             ));
   }
 }

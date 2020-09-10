@@ -6,18 +6,19 @@ import 'package:world_clock_app/async_redux/connector/time_connector.dart';
 class TimePickerButton extends StatelessWidget {
   final DateTime pickedTime;
   final Function(DateTime) onTimePicked;
-  final String text;
+  final String timePickerButtonText;
 
   const TimePickerButton(
-      {Key key, this.pickedTime, this.onTimePicked, this.text})
+      {Key key, this.pickedTime, this.onTimePicked, this.timePickerButtonText})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return _raisedButton(context, this.pickedTime, this.text);
+    return _raisedButton(context, this.pickedTime, this.timePickerButtonText);
   }
 
-  Widget _raisedButton(BuildContext context, DateTime pickedTime, String text) {
+  Widget _raisedButton(
+      BuildContext context, DateTime pickedTime, String timePickerButtonText) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: RaisedButton(
@@ -40,7 +41,7 @@ class TimePickerButton extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(
-                text,
+                timePickerButtonText,
               ),
               TimeConnector(
                 pickedTime,

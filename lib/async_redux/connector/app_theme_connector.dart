@@ -13,7 +13,7 @@ class AppThemeConnector extends StatelessWidget {
         builder: (BuildContext context, TimeModel vm) => TimePickerButton(
               pickedTime: vm.endOfDay,
               onTimePicked: vm.setEndOfDay,
-              text: ' End: ${DateFormat.jm().format(vm.endOfDay)}',
+              timePickerButtonText: ' End: ${DateFormat.jm().format(vm.endOfDay)}',
             ));
   }
 }

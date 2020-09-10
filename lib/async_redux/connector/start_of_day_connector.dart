@@ -13,7 +13,7 @@ class StartDayConnector extends StatelessWidget {
         builder: (BuildContext context, TimeModel vm) => TimePickerButton(
               pickedTime: vm.startOfDay,
               onTimePicked: vm.setStartOfDay,
-              text: ' Sunrise: ',
+              timePickerButtonText: ' Sunrise: ',
             ));
   }
 }
