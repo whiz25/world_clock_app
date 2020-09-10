@@ -36,17 +36,13 @@ class ThemePicker extends StatelessWidget {
             alignment: Alignment.center,
             height: 50.0,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
                   Icons.color_lens,
-                  color: Colors.white,
                 ),
                 Text(
                   ' Change Theme Color',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18.0,
-                      color: Colors.white),
                 ),
               ],
             )),
