@@ -39,19 +39,11 @@ class TimePickerButton extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Container(
-                    child: Row(
-                      children: <Widget>[
-                        Text(text,),
-                        TimeConnector(
-                          pickedTime,
-                        ),
-                      ],
-                    ),
-                  )
-                ],
+              Text(
+                text,
+              ),
+              TimeConnector(
+                pickedTime,
               ),
               Text(
                 "  Change",
