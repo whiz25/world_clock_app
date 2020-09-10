@@ -21,12 +21,8 @@ class TimeModel extends BaseModel<AppState> {
       this.startOfDay,
       this.endOfDay,
       this.lightOrDarkTheme})
-      : super(equals: [
-          isTwentyFourHour,
-          startOfDay,
-          endOfDay,
-          lightOrDarkTheme
-        ]);
+      : super(
+            equals: [isTwentyFourHour, startOfDay, endOfDay, lightOrDarkTheme]);
 
   @override
   TimeModel fromStore() {

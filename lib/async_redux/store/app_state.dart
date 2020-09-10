@@ -4,34 +4,34 @@ class AppState {
   final DateTime endOfDay;
   final bool lightOrDarkTheme;
 
-  AppState(
-      {this.isTwentyFourHour,
-      this.startOfDay,
-      this.endOfDay,
-      this.lightOrDarkTheme,
-      });
+  AppState({
+    this.isTwentyFourHour,
+    this.startOfDay,
+    this.endOfDay,
+    this.lightOrDarkTheme,
+  });
 
-  AppState copy(
-      {bool isTwentyFourHour,
-      DateTime startOfDay,
-      DateTime endOfDay,
-      bool lightOrDarkTheme,
-      }) {
+  AppState copy({
+    bool isTwentyFourHour,
+    DateTime startOfDay,
+    DateTime endOfDay,
+    bool lightOrDarkTheme,
+  }) {
     return AppState(
-        isTwentyFourHour: isTwentyFourHour ?? this.isTwentyFourHour,
-        startOfDay: startOfDay ?? this.startOfDay,
-        endOfDay: endOfDay ?? this.endOfDay,
-        lightOrDarkTheme: lightOrDarkTheme ?? this.lightOrDarkTheme,
-       );
+      isTwentyFourHour: isTwentyFourHour ?? this.isTwentyFourHour,
+      startOfDay: startOfDay ?? this.startOfDay,
+      endOfDay: endOfDay ?? this.endOfDay,
+      lightOrDarkTheme: lightOrDarkTheme ?? this.lightOrDarkTheme,
+    );
   }
 
   static AppState initialState() {
     return AppState(
-        isTwentyFourHour: false,
-        startOfDay: DateTime.now(),
-        endOfDay: DateTime.now(),
-        lightOrDarkTheme: true,
-        );
+      isTwentyFourHour: false,
+      startOfDay: DateTime.now(),
+      endOfDay: DateTime.now(),
+      lightOrDarkTheme: false,
+    );
   }
 
   @override
