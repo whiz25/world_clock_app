@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/intl.dart';
 import 'package:mockito/mockito.dart';
@@ -15,9 +14,8 @@ import 'build_test_main.dart';
 
 class MockClient extends Mock implements http.Client {}
 
-void main(){
-
-  setUp((){
+void main() {
+  setUp(() {
     store.defineState(AppState.initialState());
   });
 
@@ -25,67 +23,57 @@ void main(){
     var time = DateTime(2020, 13, 00, 00);
     await tester.pumpWidget(buildTestMain(TimeConnector(time)));
     await tester.pumpAndSettle();
-    
+
     var timeStr = DateFormat.jm().format(time);
-    expect(
-      find.text(timeStr),
-      findsOneWidget
-    );
+    expect(find.text(timeStr), findsOneWidget);
 
     await store.dispatchFuture(ChangeTimeFormatAction());
-    await tester.pumpAndSettle();
-    
+    await tester.pumpAndSettle(); // Rebuild the widget
+
     var time24H = DateFormat.Hm().format(time);
-    expect(
-      find.text(time24H),
-      findsOneWidget
-    );
+    expect(find.text(time24H), findsOneWidget);
   });
 
-  testWidgets('City Time Test', (WidgetTester tester) async {  
+  testWidgets('City Time Test', (WidgetTester tester) async {
     httpClient.http = MockClient();
 
-    when(httpClient.http.get('http://worldtimeapi.org/api/timezone/Europe/Copenhagen'))
-          .thenAnswer((_) async => http.Response('{"abbreviation":"CEST","client_ip":"2.104.7.182","datetime":"2020-09-09T14:12:46.794845+02:00","day_of_week":3,"day_of_year":253,"dst":true,"dst_from":"2020-03-29T01:00:00+00:00","dst_offset":3600,"dst_until":"2020-10-25T01:00:00+00:00","raw_offset":3600,"timezone":"Europe/Copenhagen","unixtime":1599653566,"utc_datetime":"2020-09-09T12:12:46.794845+00:00","utc_offset":"+02:00","week_number":37}', 200));
+    when(httpClient.http
+            .get('http://worldtimeapi.org/api/timezone/Europe/Copenhagen'))
+        .thenAnswer((_) async => http.Response(
+            '{"abbreviation":"CEST","client_ip":"2.104.7.182","datetime":"2020-09-09T14:12:46.794845+02:00","day_of_week":3,"day_of_year":253,"dst":true,"dst_from":"2020-03-29T01:00:00+00:00","dst_offset":3600,"dst_until":"2020-10-25T01:00:00+00:00","raw_offset":3600,"timezone":"Europe/Copenhagen","unixtime":1599653566,"utc_datetime":"2020-09-09T12:12:46.794845+00:00","utc_offset":"+02:00","week_number":37}',
+            200));
 
     // Build our app and trigger a frame.
     await tester.pumpWidget(buildTestMain(CityTime("Europe/Copenhagen")));
     await tester.pumpAndSettle();
 
-    expect(
-      find.text("Europe/Copenhagen"),
-      findsOneWidget
-    );
+    expect(find.text("Europe/Copenhagen"), findsOneWidget);
 
     var dt = DateTime(1970, 1, 1, 14, 12, 46);
     var time = DateFormat.jm().format(dt);
-    expect(
-      find.text(time),
-      findsOneWidget
-    );
+    expect(find.text(time), findsOneWidget);
 
     await store.dispatchFuture(ChangeTimeFormatAction());
-    await tester.pumpAndSettle();
-    
-    var time24H = DateFormat.Hm().format(dt);
-    expect(
-      find.text(time24H),
-      findsOneWidget
-    );
+    await tester.pumpAndSettle(); // Rebuild the widget 
 
+    var time24H = DateFormat.Hm().format(dt);
+    expect(find.text(time24H), findsOneWidget);
   });
 
   test("City Time Bloc", () async {
     httpClient.http = MockClient();
 
-    when(httpClient.http.get('http://worldtimeapi.org/api/timezone/Europe/Copenhagen'))
-          .thenAnswer((_) async => http.Response('{"abbreviation":"CEST","client_ip":"2.104.7.182","datetime":"2020-09-09T14:12:46.794845+02:00","day_of_week":3,"day_of_year":253,"dst":true,"dst_from":"2020-03-29T01:00:00+00:00","dst_offset":3600,"dst_until":"2020-10-25T01:00:00+00:00","raw_offset":3600,"timezone":"Europe/Copenhagen","unixtime":1599653566,"utc_datetime":"2020-09-09T12:12:46.794845+00:00","utc_offset":"+02:00","week_number":37}', 200));
+    when(httpClient.http
+            .get('http://worldtimeapi.org/api/timezone/Europe/Copenhagen'))
+        .thenAnswer((_) async => http.Response(
+            '{"abbreviation":"CEST","client_ip":"2.104.7.182","datetime":"2020-09-09T14:12:46.794845+02:00","day_of_week":3,"day_of_year":253,"dst":true,"dst_from":"2020-03-29T01:00:00+00:00","dst_offset":3600,"dst_until":"2020-10-25T01:00:00+00:00","raw_offset":3600,"timezone":"Europe/Copenhagen","unixtime":1599653566,"utc_datetime":"2020-09-09T12:12:46.794845+00:00","utc_offset":"+02:00","week_number":37}',
+            200));
 
     var bloc = CityTimeBloc(url: "Europe/Copenhagen");
     var initial = await bloc.loadInitialState();
     var time = initial.timeNow();
-    expect(time.hour, 14); 
-    expect(time.minute, 12); 
-    expect(time.second, 46); 
+    expect(time.hour, 14);
+    expect(time.minute, 12);
+    expect(time.second, 46);
   });
 }

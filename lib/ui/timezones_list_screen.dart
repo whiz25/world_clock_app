@@ -13,12 +13,19 @@ class TimezoneList extends StatefulWidget {
 }
 
 class _TimezoneListState extends State<TimezoneList> {
-  TimezoneBloc bloc = TimezoneBloc();
+  TimezoneBloc bloc;
 
   @override
   void initState() {
     super.initState();
     bloc = TimezoneBloc(region: this.widget.region);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    bloc.dispose();
   }
 
   @override

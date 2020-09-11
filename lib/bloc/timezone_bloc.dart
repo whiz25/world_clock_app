@@ -15,4 +15,10 @@ class TimezoneBloc extends Bloc<TimezoneState> {
         await timezoneClient.loadTimezones(region: this.region);
     return TimezoneState(timezones: timezones);
   }
+
+  getTimezones(String region) async {
+    TimezoneClient timezoneClient = TimezoneClient();
+    var timezones = await timezoneClient.loadTimezones(region: region);
+    return timezones;
+  }
 }
