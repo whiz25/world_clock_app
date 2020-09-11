@@ -1,0 +1,45 @@
+## Specification and Design Document
+This document contains details about features implemented or to
+be implemented in the app.
+
+1- ALARM FEATURE
+  This feature will enable a user to create an alarm based
+  on time from different city time zones supported by the app.
+
+  ## SPECIFICATION
+
+    - Visit the city time page  
+
+    - Click on a button to set an alarm for the city selected 
+
+    - See the alarm from the city page and the ‘Alarms’ page 
+
+    - Go to 'Alarms’ page from the city time screen 
+
+    - See a list of alarms set  
+
+    - Each alarm should display corresponding local time 
+
+    - An alarm will ring at the exact time it was set 
+
+    - Delete alarms by swiping right 
+
+  ## DESIGN 
+
+    ## Classes and methods 
+
+    - Implement the feature with existing AppState class for storing the alarm created as a key/value pair in a map object. The map object will take the “url” from the city time as a key and the alarm set as the value. 
+
+    - Each alarm object will have the “url” and the "time” as key/value pair. 
+
+    - Re-use existing TimeModel class for dispatching created alarm to the store as a DateTime object. A method that takes “url” and “time” as arguments will be created in the TimeModel 
+
+    - The reducer action will update the alarm map object by adding the newly created alarm 
+
+    - Two connectors will be created to render the alarm in the “Alarm” page and the city time page 
+
+    - The connector in the “Alams” page will render a list of alarms from the store 
+
+    - The connector in the city time page will render the alarm for the given “url”. This connector will take a “url” as an argument and use it to fetch the alarm time from the store 
+
+ 
