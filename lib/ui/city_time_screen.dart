@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:world_clock_app/async_redux/connector/set_alarm_connector.dart';
 import 'package:world_clock_app/async_redux/connector/time_connector.dart';
 import 'package:world_clock_app/bloc/bloc_provider.dart';
 import 'package:world_clock_app/bloc/city_time_bloc.dart';
@@ -40,9 +41,10 @@ class _CityTimeState extends State<CityTime>
 
   @override
   void dispose() {
+    super.dispose();
+
     animationController.dispose();
     bloc.dispose();
-    super.dispose();
   }
 
   @override
@@ -93,7 +95,10 @@ class _CityTimeState extends State<CityTime>
             state.timeNow(),
             textStyle:
                 TextStyle(fontSize: 45.0 * animation.timeAnimation.value),
-          )
+          ),
+          SetAlarmConnector(
+            url: this.widget.url,
+          ),
         ],
       ),
     );

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:world_clock_app/async_redux/connector/auto_fetch_start_end.dart';
 import 'package:world_clock_app/async_redux/connector/color_theme_connector.dart';
 import 'package:world_clock_app/async_redux/connector/end_of_day_connector.dart';

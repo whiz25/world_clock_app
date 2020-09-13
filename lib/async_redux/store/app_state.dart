@@ -3,35 +3,41 @@ class AppState {
   final DateTime startOfDay;
   final DateTime endOfDay;
   final bool lightOrDarkTheme;
+  final List<Map<String, dynamic>> alarm;
+  final String url;
 
-  AppState({
-    this.isTwentyFourHour,
-    this.startOfDay,
-    this.endOfDay,
-    this.lightOrDarkTheme,
-  });
+  AppState(
+      {this.isTwentyFourHour,
+      this.startOfDay,
+      this.endOfDay,
+      this.lightOrDarkTheme,
+      this.alarm,
+      this.url});
 
-  AppState copy({
-    bool isTwentyFourHour,
-    DateTime startOfDay,
-    DateTime endOfDay,
-    bool lightOrDarkTheme,
-  }) {
+  AppState copy(
+      {bool isTwentyFourHour,
+      DateTime startOfDay,
+      DateTime endOfDay,
+      bool lightOrDarkTheme,
+      List<Map<String, dynamic>> alarm,
+      String url}) {
     return AppState(
-      isTwentyFourHour: isTwentyFourHour ?? this.isTwentyFourHour,
-      startOfDay: startOfDay ?? this.startOfDay,
-      endOfDay: endOfDay ?? this.endOfDay,
-      lightOrDarkTheme: lightOrDarkTheme ?? this.lightOrDarkTheme,
-    );
+        isTwentyFourHour: isTwentyFourHour ?? this.isTwentyFourHour,
+        startOfDay: startOfDay ?? this.startOfDay,
+        endOfDay: endOfDay ?? this.endOfDay,
+        lightOrDarkTheme: lightOrDarkTheme ?? this.lightOrDarkTheme,
+        alarm: alarm ?? this.alarm,
+        url: url ?? this.url);
   }
 
   static AppState initialState() {
     return AppState(
-      isTwentyFourHour: false,
-      startOfDay: DateTime.now(),
-      endOfDay: DateTime.now(),
-      lightOrDarkTheme: false,
-    );
+        isTwentyFourHour: false,
+        startOfDay: DateTime.now(),
+        endOfDay: DateTime.now(),
+        lightOrDarkTheme: false,
+        url: 'Africa/Kampala',
+        alarm: [{'no_alarm_set': ''}]);
   }
 
   @override
@@ -41,12 +47,14 @@ class AppState {
           isTwentyFourHour == other.isTwentyFourHour &&
           startOfDay == other.startOfDay &&
           endOfDay == other.endOfDay &&
-          lightOrDarkTheme == other.lightOrDarkTheme;
+          lightOrDarkTheme == other.lightOrDarkTheme &&
+          alarm == other.alarm && url == other.url;
 
   @override
   int get hashCode =>
       isTwentyFourHour.hashCode ^
       startOfDay.hashCode ^
       endOfDay.hashCode ^
-      lightOrDarkTheme.hashCode;
+      lightOrDarkTheme.hashCode ^
+      alarm.hashCode ^ url.hashCode;
 }

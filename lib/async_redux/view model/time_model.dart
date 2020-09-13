@@ -4,6 +4,7 @@ import 'package:world_clock_app/async_redux/action/auto_fetch_action.dart';
 import 'package:world_clock_app/async_redux/action/change_format_action.dart';
 import 'package:world_clock_app/async_redux/action/choose_theme_action.dart';
 import 'package:world_clock_app/async_redux/action/end_of_day_actions.dart';
+import 'package:world_clock_app/async_redux/action/set_alarm_action.dart';
 import 'package:world_clock_app/async_redux/action/start_of_day_action.dart';
 import 'package:world_clock_app/async_redux/action/theme_toggle_action.dart';
 import 'package:world_clock_app/async_redux/store/app_state.dart';
@@ -15,14 +16,24 @@ class TimeModel extends BaseModel<AppState> {
   final DateTime startOfDay;
   final DateTime endOfDay;
   final bool lightOrDarkTheme;
+  final List<Map<String, dynamic>> alarm;
+  final String url;
 
   TimeModel(
       {this.isTwentyFourHour,
       this.startOfDay,
       this.endOfDay,
-      this.lightOrDarkTheme})
-      : super(
-            equals: [isTwentyFourHour, startOfDay, endOfDay, lightOrDarkTheme]);
+      this.lightOrDarkTheme,
+      this.alarm,
+      this.url})
+      : super(equals: [
+          isTwentyFourHour,
+          startOfDay,
+          endOfDay,
+          lightOrDarkTheme,
+          alarm,
+          url
+        ]);
 
   @override
   TimeModel fromStore() {
@@ -30,7 +41,9 @@ class TimeModel extends BaseModel<AppState> {
         isTwentyFourHour: state.isTwentyFourHour,
         startOfDay: state.startOfDay,
         endOfDay: state.endOfDay,
-        lightOrDarkTheme: state.lightOrDarkTheme);
+        lightOrDarkTheme: state.lightOrDarkTheme,
+        alarm: state.alarm,
+        url: state.url);
   }
 
   String formatTime(DateTime time) {
@@ -71,5 +84,9 @@ class TimeModel extends BaseModel<AppState> {
     } else {
       return ThemeData.light();
     }
+  }
+
+  void setAlarm(String url, DateTime alarm) {
+    store.dispatch(SetAlarmAction(url: url, alarm: alarm));
   }
 }
