@@ -8,10 +8,8 @@ import '../../main.dart';
 
 class SetAlarmConnector extends StatelessWidget {
   final String url;
-  final DateTime pickedTime;
 
-  const SetAlarmConnector({Key key, this.url, this.pickedTime})
-      : super(key: key);
+  const SetAlarmConnector({Key key, this.url}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +33,10 @@ class SetAlarmConnector extends StatelessWidget {
               var selectedTime = await showTimePicker(
                   context: context, initialTime: TimeOfDay.now());
               if (selectedTime != null) {
-                print(selectedTime);
                 timeModel.setAlarm(this.url, selectedTime);
+                var selectedDateTime =
+                    DateTime(selectedTime.hour, selectedTime.minute);
+                scheduleAlarm(selectedDateTime);
               }
             },
             child: Container(
