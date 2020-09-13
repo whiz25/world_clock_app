@@ -8,16 +8,17 @@ import '../../main.dart';
 
 class SetAlarmConnector extends StatelessWidget {
   final String url;
+  final DateTime pickedTime;
 
-  const SetAlarmConnector({Key key, this.url}) : super(key: key);
+  const SetAlarmConnector({Key key, this.url, this.pickedTime})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, TimeModel>(
         model: TimeModel(),
-        builder: (BuildContext context, TimeModel vm) {
-          return _setAlarmForCity(context, vm);
-        });
+        builder: (BuildContext context, TimeModel vm) =>
+            _setAlarmForCity(context, vm));
   }
 
   Widget _setAlarmForCity(BuildContext context, TimeModel timeModel) {
@@ -25,15 +26,18 @@ class SetAlarmConnector extends StatelessWidget {
       padding: const EdgeInsets.only(top: 40.0),
       child: Column(
         children: [
-          timeModel.alarm[0]['no_alarm_set'] == ''
-              ? Text('No alarm set for ${this.url}')
-              : Text(timeModel.alarm[0]['${this.url}']),
+          Text('Upcoming alarm: ${timeModel.alarm.format(context)}'),
           RaisedButton(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5.0)),
             elevation: 4.0,
-            onPressed: () {
-              setAlarm(DateTime.now());
+            onPressed: () async {
+              var selectedTime = await showTimePicker(
+                  context: context, initialTime: TimeOfDay.now());
+              if (selectedTime != null) {
+                print(selectedTime);
+                timeModel.setAlarm(this.url, selectedTime);
+              }
             },
             child: Container(
                 alignment: Alignment.center,
@@ -46,7 +50,8 @@ class SetAlarmConnector extends StatelessWidget {
     );
   }
 
-  void setAlarm(DateTime setNotificationDateTime) async {
+  void scheduleAlarm(DateTime setNotificationDateTime) async {
+    print(setNotificationDateTime);
     var androidPlatformChannelSpecifics = AndroidNotificationDetails(
         'alarm_notif', 'alarm_notif', 'channel for Alarm notification',
         icon: 'blue_marble',
@@ -65,8 +70,8 @@ class SetAlarmConnector extends StatelessWidget {
 
     await flutterLocalNotificationsPlugin.schedule(
         0,
-        'Office',
-        'Good morning, time to write some code',
+        '${this.url}',
+        'Time to get some work done!',
         setNotificationDateTime,
         platformChannelSpecifics);
   }

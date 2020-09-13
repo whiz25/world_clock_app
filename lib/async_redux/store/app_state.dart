@@ -1,9 +1,11 @@
+import 'package:flutter/material.dart';
+
 class AppState {
   final bool isTwentyFourHour;
   final DateTime startOfDay;
   final DateTime endOfDay;
   final bool lightOrDarkTheme;
-  final List<Map<String, dynamic>> alarm;
+  final TimeOfDay alarm;
   final String url;
 
   AppState(
@@ -19,7 +21,7 @@ class AppState {
       DateTime startOfDay,
       DateTime endOfDay,
       bool lightOrDarkTheme,
-      List<Map<String, dynamic>> alarm,
+      TimeOfDay alarm,
       String url}) {
     return AppState(
         isTwentyFourHour: isTwentyFourHour ?? this.isTwentyFourHour,
@@ -37,7 +39,7 @@ class AppState {
         endOfDay: DateTime.now(),
         lightOrDarkTheme: false,
         url: 'Africa/Kampala',
-        alarm: [{'no_alarm_set': ''}]);
+        alarm: TimeOfDay.now());
   }
 
   @override

@@ -7,9 +7,10 @@ class TimePickerButton extends StatelessWidget {
   final DateTime pickedTime;
   final Function(DateTime) onTimePicked;
   final String timePickerButtonText;
+  final String buttonText;
 
   const TimePickerButton(
-      {Key key, this.pickedTime, this.onTimePicked, this.timePickerButtonText})
+      {Key key, this.pickedTime, this.onTimePicked, this.timePickerButtonText, this.buttonText})
       : super(key: key);
 
   @override
@@ -47,7 +48,7 @@ class TimePickerButton extends StatelessWidget {
                 pickedTime,
               ),
               Text(
-                "  Change",
+                "  $buttonText",
               ),
             ],
           ),

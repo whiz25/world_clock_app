@@ -16,7 +16,7 @@ class TimeModel extends BaseModel<AppState> {
   final DateTime startOfDay;
   final DateTime endOfDay;
   final bool lightOrDarkTheme;
-  final List<Map<String, dynamic>> alarm;
+  final TimeOfDay alarm;
   final String url;
 
   TimeModel(
@@ -86,7 +86,7 @@ class TimeModel extends BaseModel<AppState> {
     }
   }
 
-  void setAlarm(String url, DateTime alarm) {
+  void setAlarm(String url, TimeOfDay alarm) {
     store.dispatch(SetAlarmAction(url: url, alarm: alarm));
   }
 }
