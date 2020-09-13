@@ -6,6 +6,8 @@ import 'package:world_clock_app/bloc/city_time_bloc.dart';
 import 'package:world_clock_app/bloc/city_time_state.dart';
 import 'package:world_clock_app/ui/animation.dart';
 
+import 'alarms_screen.dart';
+
 class CityTime extends StatefulWidget {
   final String url;
   CityTime(this.url);
@@ -55,6 +57,14 @@ class _CityTimeState extends State<CityTime>
         return Scaffold(
           appBar: AppBar(
             title: Text(bloc.url),
+            actions: [
+              IconButton(
+                  icon: Icon(Icons.alarm),
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => AlarmsScreen()));
+                  })
+            ],
           ),
           body: _buildCityTime(context, state),
         );
