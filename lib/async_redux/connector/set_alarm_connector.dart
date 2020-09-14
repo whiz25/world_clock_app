@@ -24,7 +24,8 @@ class SetAlarmConnector extends StatelessWidget {
       padding: const EdgeInsets.only(top: 40.0),
       child: Column(
         children: [
-          Text('Upcoming alarm: ${timeModel.alarm.format(context)}'),
+          Text(
+              'Upcoming alarm: ${timeModel.alarm.format(context)}'),
           RaisedButton(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5.0)),
@@ -33,9 +34,9 @@ class SetAlarmConnector extends StatelessWidget {
               var selectedTime = await showTimePicker(
                   context: context, initialTime: TimeOfDay.now());
               if (selectedTime != null) {
-                timeModel.setAlarm(this.url, selectedTime);
                 var selectedDateTime =
                     DateTime(selectedTime.hour, selectedTime.minute);
+                timeModel.setAlarm(this.url, selectedTime);
                 scheduleAlarm(selectedDateTime);
               }
             },

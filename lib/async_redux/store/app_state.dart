@@ -50,7 +50,8 @@ class AppState {
           startOfDay == other.startOfDay &&
           endOfDay == other.endOfDay &&
           lightOrDarkTheme == other.lightOrDarkTheme &&
-          alarm == other.alarm && url == other.url;
+          alarm == other.alarm &&
+          url == other.url;
 
   @override
   int get hashCode =>
@@ -58,5 +59,6 @@ class AppState {
       startOfDay.hashCode ^
       endOfDay.hashCode ^
       lightOrDarkTheme.hashCode ^
-      alarm.hashCode ^ url.hashCode;
+      alarm.hashCode ^
+      url.hashCode;
 }
