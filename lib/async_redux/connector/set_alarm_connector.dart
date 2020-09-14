@@ -51,7 +51,7 @@ class SetAlarmConnector extends StatelessWidget {
     );
   }
 
-  void scheduleAlarm(DateTime setNotificationDateTime) async {
+  scheduleAlarm(DateTime setNotificationDateTime) async {
     print(setNotificationDateTime);
     var androidPlatformChannelSpecifics = AndroidNotificationDetails(
         'alarm_notif', 'alarm_notif', 'channel for Alarm notification',

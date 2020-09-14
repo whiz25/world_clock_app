@@ -54,7 +54,7 @@ void main() {
     expect(find.text(time), findsOneWidget);
 
     await store.dispatchFuture(ChangeTimeFormatAction());
-    await tester.pumpAndSettle(); // Rebuild the widget 
+    await tester.pumpAndSettle(); // Rebuild the widget
 
     var time24H = DateFormat.Hm().format(dt);
     expect(find.text(time24H), findsOneWidget);
