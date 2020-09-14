@@ -4,7 +4,7 @@ class AppState {
   final bool isTwentyFourHour;
   final DateTime sunrise;
   final DateTime sunset;
-  final bool lightOrDarkTheme;
+  bool lightOrDarkTheme;
   final TimeOfDay alarm;
   final String url;
 
