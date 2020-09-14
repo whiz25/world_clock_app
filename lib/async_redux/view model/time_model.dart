@@ -66,8 +66,8 @@ class TimeModel extends BaseModel<AppState> {
     store.dispatch(SunsetAction(newTime));
   }
 
-  void autoSetStartAndEnd() {
-    store.dispatch(AutoFetchStartAndEndAction());
+  void autoSetSunriseAndSunset() {
+    store.dispatch(AutoFetchSunriseAndSunsetAction());
   }
 
   void changeThemeColor(Color newPrimaryColor) {

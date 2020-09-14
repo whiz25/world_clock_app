@@ -3,7 +3,7 @@ import 'package:world_clock_app/async_redux/store/app_state.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class AutoFetchStartAndEndAction extends ReduxAction<AppState> {
+class AutoFetchSunriseAndSunsetAction extends ReduxAction<AppState> {
   @override
   Future<AppState> reduce() async {
     final response = await http.get(

@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:world_clock_app/async_redux/store/app_state.dart';
 import 'package:world_clock_app/async_redux/view%20model/time_model.dart';
 
-class AutoFetchStartAndEnd extends StatelessWidget {
+class AutoFetchSunriseAndSunsetConnector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, TimeModel>(
@@ -20,7 +20,7 @@ class AutoFetchStartAndEnd extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
         elevation: 4.0,
         onPressed: () {
-          model.autoSetStartAndEnd();
+          model.autoSetSunriseAndSunset();
         },
         child: Container(
           alignment: Alignment.center,

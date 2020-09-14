@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:world_clock_app/async_redux/connector/auto_fetch_start_end.dart';
+import 'package:world_clock_app/async_redux/connector/auto_fetch_sunrise_and_sunset.dart';
 import 'package:world_clock_app/async_redux/connector/color_theme_connector.dart';
 import 'package:world_clock_app/async_redux/connector/sunset_connector.dart';
 import 'package:world_clock_app/async_redux/connector/sunrise_connector.dart';
@@ -27,7 +27,7 @@ class _SettingsState extends State<Settings> {
             ToggleTimeConnector(),
             SunriseConnector(),
             SunsetConnector(),
-            AutoFetchStartAndEnd(),
+            AutoFetchSunriseAndSunsetConnector(),
             ColorThemeConnector(),
             ThemeToggleConnector()
           ],
