@@ -12,7 +12,8 @@ class AutoFetchSunriseAndSunsetAction extends ReduxAction<AppState> {
 
     String sunriseDateTime =
         jsonResponse['location']['time'][0]['sunrise']['time'];
-    String sunsetDateTime = jsonResponse['location']['time'][0]['sunset']['time'];
+    String sunsetDateTime =
+        jsonResponse['location']['time'][0]['sunset']['time'];
 
     DateTime newSunrise = DateTime.parse(sunriseDateTime);
     DateTime newSunset = DateTime.parse(sunsetDateTime);
