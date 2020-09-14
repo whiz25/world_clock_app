@@ -4,15 +4,16 @@ import 'package:world_clock_app/async_redux/store/app_state.dart';
 import 'package:world_clock_app/async_redux/view%20model/time_model.dart';
 import 'package:world_clock_app/ui/time_picker_button.dart';
 
-class EndDayConnector extends StatelessWidget {
+class SunriseConnector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, TimeModel>(
         model: TimeModel(),
         builder: (BuildContext context, TimeModel vm) => TimePickerButton(
-              pickedTime: vm.endOfDay,
-              onTimePicked: vm.setEndOfDay,
-              timePickerButtonText: ' Sunset: ',
+              pickedTime: vm.sunrise,
+              onTimePicked: vm.setsunset,
+              buttonText: 'Change',
+              timePickerButtonText: ' Sunrise: ',
             ));
   }
 }

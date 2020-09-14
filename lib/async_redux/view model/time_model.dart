@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:world_clock_app/async_redux/action/auto_fetch_action.dart';
 import 'package:world_clock_app/async_redux/action/change_format_action.dart';
 import 'package:world_clock_app/async_redux/action/choose_theme_action.dart';
-import 'package:world_clock_app/async_redux/action/end_of_day_actions.dart';
+import 'package:world_clock_app/async_redux/action/sunset_action.dart';
 import 'package:world_clock_app/async_redux/action/set_alarm_action.dart';
-import 'package:world_clock_app/async_redux/action/start_of_day_action.dart';
+import 'package:world_clock_app/async_redux/action/sunrise_action.dart';
 import 'package:world_clock_app/async_redux/action/theme_toggle_action.dart';
 import 'package:world_clock_app/async_redux/store/app_state.dart';
 import 'package:intl/intl.dart';
@@ -13,23 +13,23 @@ import 'package:world_clock_app/async_redux/store/redux_store.dart';
 
 class TimeModel extends BaseModel<AppState> {
   final bool isTwentyFourHour;
-  final DateTime startOfDay;
-  final DateTime endOfDay;
+  final DateTime sunrise;
+  final DateTime sunset;
   final bool lightOrDarkTheme;
   final TimeOfDay alarm;
   final String url;
 
   TimeModel(
       {this.isTwentyFourHour,
-      this.startOfDay,
-      this.endOfDay,
+      this.sunrise,
+      this.sunset,
       this.lightOrDarkTheme,
       this.alarm,
       this.url})
       : super(equals: [
           isTwentyFourHour,
-          startOfDay,
-          endOfDay,
+          sunrise,
+          sunset,
           lightOrDarkTheme,
           alarm,
           url
@@ -39,8 +39,8 @@ class TimeModel extends BaseModel<AppState> {
   TimeModel fromStore() {
     return TimeModel(
         isTwentyFourHour: state.isTwentyFourHour,
-        startOfDay: state.startOfDay,
-        endOfDay: state.endOfDay,
+        sunrise: state.sunrise,
+        sunset: state.sunset,
         lightOrDarkTheme: state.lightOrDarkTheme,
         alarm: state.alarm,
         url: state.url);
@@ -58,12 +58,12 @@ class TimeModel extends BaseModel<AppState> {
     store.dispatch(ChangeTimeFormatAction());
   }
 
-  void setStartOfDay(DateTime newTime) {
-    store.dispatch(StartOfDayAction(newTime));
+  void setsunrise(DateTime newTime) {
+    store.dispatch(SunriseAction(newTime));
   }
 
-  void setEndOfDay(DateTime newTime) {
-    store.dispatch(EndOfDayAction(newTime));
+  void setsunset(DateTime newTime) {
+    store.dispatch(SunsetAction(newTime));
   }
 
   void autoSetStartAndEnd() {

@@ -10,13 +10,13 @@ class AutoFetchStartAndEndAction extends ReduxAction<AppState> {
         'https://api.met.no/weatherapi/sunrise/2.0/.json?lat=40.7127&lon=-74.0059&date=2020-09-08&offset=-05:00');
     final jsonResponse = json.decode(response.body);
 
-    String startDateTime =
+    String sunriseDateTime =
         jsonResponse['location']['time'][0]['sunrise']['time'];
-    String endDateTime = jsonResponse['location']['time'][0]['sunset']['time'];
+    String sunsetDateTime = jsonResponse['location']['time'][0]['sunset']['time'];
 
-    DateTime newStartOfDay = DateTime.parse(startDateTime);
-    DateTime newEndOfDay = DateTime.parse(endDateTime);
+    DateTime newSunrise = DateTime.parse(sunriseDateTime);
+    DateTime newSunset = DateTime.parse(sunsetDateTime);
 
-    return state.copy(startOfDay: newStartOfDay, endOfDay: newEndOfDay);
+    return state.copy(sunrise: newSunrise, sunset: newSunset);
   }
 }
