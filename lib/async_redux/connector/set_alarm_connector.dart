@@ -24,8 +24,7 @@ class SetAlarmConnector extends StatelessWidget {
       padding: const EdgeInsets.only(top: 40.0),
       child: Column(
         children: [
-          Text(
-              'Upcoming alarm: ${timeModel.alarm.format(context)}'),
+          Text('Upcoming alarm: ${timeModel.alarm.format(context)}'),
           RaisedButton(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5.0)),
@@ -33,7 +32,7 @@ class SetAlarmConnector extends StatelessWidget {
             onPressed: () async {
               var selectedTime = await showTimePicker(
                   context: context, initialTime: TimeOfDay.now());
-                  
+
               if (selectedTime != null) {
                 var selectedDateTime =
                     DateTime(selectedTime.hour, selectedTime.minute);
@@ -52,7 +51,7 @@ class SetAlarmConnector extends StatelessWidget {
     );
   }
 
-  scheduleAlarm(DateTime setNotificationDateTime) async {
+  void scheduleAlarm(DateTime setNotificationDateTime) async {
     print(setNotificationDateTime);
     var androidPlatformChannelSpecifics = AndroidNotificationDetails(
         'alarm_notif', 'alarm_notif', 'channel for Alarm notification',

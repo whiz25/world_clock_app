@@ -11,5 +11,10 @@ void main() {
 
     TestInfo<AppState> info = await storeTester.wait(SunriseAction);
     expect(info.state.sunrise, dateTime);
+
+    var newDateTime = DateTime(2020, 09, 15, 13, 30, 50);
+    storeTester.dispatch(SunriseAction(newDateTime));
+    TestInfo<AppState> newInfo = await storeTester.wait(SunriseAction);
+    expect(newInfo.state.sunrise, newDateTime);
   });
 }

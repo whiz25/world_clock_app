@@ -1,8 +1,12 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/intl.dart';
 import 'package:world_clock_app/async_redux/connector/alarms_connector.dart';
+import 'package:world_clock_app/async_redux/connector/set_alarm_connector.dart';
 import 'package:world_clock_app/async_redux/store/app_state.dart';
 import 'package:world_clock_app/async_redux/store/redux_store.dart';
+import 'package:world_clock_app/ui/city_time_page.dart';
+
+import 'build_test_main.dart';
 
 void main() {
   setUp(() {
@@ -10,11 +14,12 @@ void main() {
   });
 
   testWidgets('Test scheduled alarm', (WidgetTester tester) async {
-    var scheduledAlarm = DateTime(12, 30);
-    await tester.pumpWidget(AlarmsConnector());
+    // var scheduledAlarm = DateTime(12, 30);
+    await tester.pumpWidget(buildTestMain(SetAlarmConnector(
+      url: 'Africa/Cairo',
+    )));
     await tester.pumpAndSettle();
 
-    var timeStr = DateFormat.jm().format(scheduledAlarm);
-    expect(find.text(timeStr), findsOneWidget);
+    expect(find.text('Africa/Cairo'), findsOneWidget);
   });
 }
