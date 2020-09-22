@@ -8,7 +8,7 @@ class TimezoneClient {
   static const String _baseUrl = 'http://worldtimeapi.org/api/timezone';
 
   Future<List<dynamic>> loadTimezones({String region}) async {
-    String fileName = 'cacheData.json';
+    String fileName = '$region.json';
     Directory cacheDir = await getTemporaryDirectory();
 
     if (await File(cacheDir.path + '/' + fileName).exists()) {
@@ -23,13 +23,12 @@ class TimezoneClient {
       try {
         final response = await http.get('$_baseUrl/$region');
         if (response.statusCode <= 200) {
-          final jsonResponse = json.decode(response.body);
-
           // Save the Json response into the cacheDir file
           var cacheDir = await getTemporaryDirectory();
           File file = File(cacheDir.path + '/' + fileName);
           file.writeAsString(response.body, flush: true, mode: FileMode.write);
 
+          final jsonResponse = json.decode(response.body);
           return jsonResponse;
         } else if (response.statusCode == 503) {
           print('Service unavailable now...');
