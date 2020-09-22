@@ -33,12 +33,16 @@ dependencies:
   async_redux: ^3.0.5
   flutter_datetime_picker: ^1.4.0
   flutter_colorpicker: ^0.3.4
-  flutter_local_notifications: any
+  flutter_local_notifications: ^1.4.4+4
+  path_provider: ^1.6.16
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   mockito:
+  flutter_driver:
+    sdk: flutter
+  test: any
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

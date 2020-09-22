@@ -10,7 +10,8 @@ import 'alarms_screen.dart';
 
 class CityTime extends StatefulWidget {
   final String url;
-  CityTime(this.url);
+  final TimeOfDay selectedTime;
+  CityTime(this.url, {this.selectedTime});
 
   @override
   State createState() => _CityTimeState();
@@ -108,6 +109,7 @@ class _CityTimeState extends State<CityTime>
           ),
           SetAlarmConnector(
             url: this.widget.url,
+            selectedTime: this.widget.selectedTime,
           ),
         ],
       ),
