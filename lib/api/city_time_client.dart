@@ -6,7 +6,8 @@ import 'package:world_clock_app/util/http_client.dart';
 final String _baseUrl = 'http://worldtimeapi.org/api/timezone';
 
 Future<Map<String, dynamic>> getCityTime({String url}) async {
-  String fileName = '$url.json';
+  String newUrl = url.replaceAll('/', '_');
+  String fileName = '$newUrl.json';
   Directory cacheDir = await getTemporaryDirectory();
 
   if (await File(cacheDir.path + '/' + fileName).exists()) {
