@@ -16,6 +16,7 @@ class ToggleTimeConnector extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: RaisedButton(
+        key: Key('toggle_time_format'),
         onPressed: () {},
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
         elevation: 4.0,

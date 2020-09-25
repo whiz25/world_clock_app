@@ -23,6 +23,9 @@ void main() {
     expect(find.text('24Hr'), findsOneWidget);
     expect(find.byType(Switch), findsOneWidget);
 
+    await tester.tap(find.byKey(Key('toggle_time_format')));
+    await tester.pumpAndSettle();
+
     // Tests: SunriseConnector
     await tester.pumpWidget(buildTestMain(SunriseConnector()));
     await tester.pumpAndSettle();
