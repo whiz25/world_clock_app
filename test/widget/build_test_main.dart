@@ -7,12 +7,11 @@ import 'package:world_clock_app/async_redux/view%20model/time_model.dart';
 import 'package:world_clock_app/repository/irepository.dart';
 import 'package:world_clock_app/repository/timezone_api_repository.dart';
 
-Widget buildTestMain(Widget child) {
+Widget buildTestMain(Widget child, {RepositoryProvider<ITimezoneRepository> repositoryProvider}) {
   return MultiRepositoryProvider(
-    providers: [
-      RepositoryProvider<ITimezoneRepository>(
-        create: (_) => TimezoneApiRepository(),
-      )
+    providers:
+    [
+      repositoryProvider != null ? repositoryProvider : RepositoryProvider<ITimezoneRepository>(create: (_) => TimezoneApiRepository())
     ],
       child: StoreProvider<AppState>(
         store: store,
