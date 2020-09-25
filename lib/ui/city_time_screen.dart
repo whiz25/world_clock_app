@@ -6,6 +6,7 @@ import 'package:world_clock_app/bloc/city_time_bloc.dart';
 import 'package:world_clock_app/bloc/city_time_state.dart';
 import 'package:world_clock_app/repository/irepository.dart';
 import 'package:world_clock_app/ui/animation.dart';
+import 'package:world_clock_app/widgets/progress_loader.dart';
 
 import 'alarms_screen.dart';
 
@@ -58,9 +59,7 @@ class _CityTimeState extends State<CityTime>
       cubit: bloc,
       builder: (context, state) {
         if (state == null) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
+          return ProgressLoader();
         }
         return Scaffold(
           appBar: AppBar(
