@@ -13,7 +13,7 @@ Widget buildTestMain(Widget child, {RepositoryProvider<ITimezoneRepository> repo
     [
       repositoryProvider != null ? repositoryProvider : RepositoryProvider<ITimezoneRepository>(create: (_) => TimezoneApiRepository())
     ],
-      child: StoreProvider<AppState>(
+    child: StoreProvider<AppState>(
         store: store,
         child: StoreConnector<AppState, TimeModel>(
             model: TimeModel(),

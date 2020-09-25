@@ -10,7 +10,11 @@ class TimePickerButton extends StatelessWidget {
   final String buttonText;
 
   const TimePickerButton(
-      {Key key, this.pickedTime, this.onTimePicked, this.timePickerButtonText, this.buttonText})
+      {Key key,
+      this.pickedTime,
+      this.onTimePicked,
+      this.timePickerButtonText,
+      this.buttonText})
       : super(key: key);
 
   @override
