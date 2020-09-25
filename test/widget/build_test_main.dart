@@ -14,7 +14,7 @@ Widget buildTestMain(Widget child) {
         create: (_) => TimezoneApiRepository(),
       )
     ],
-      child: StoreProvider<AppState>(
+    child: StoreProvider<AppState>(
         store: store,
         child: StoreConnector<AppState, TimeModel>(
             model: TimeModel(),
