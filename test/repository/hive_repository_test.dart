@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:world_clock_app/model/timezone_info.dart';
@@ -9,6 +10,12 @@ class MockRepository extends Mock implements ITimezoneRepository {
 }
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+  const MethodChannel channel = MethodChannel('plugins.flutter.io/path_provider');
+  channel.setMockMethodCallHandler((MethodCall methodCall) async {
+    return ".";
+  });
+
   test('Test HiveRepository', () async {
     await HiveTimezoneRepository.initialize();
 
