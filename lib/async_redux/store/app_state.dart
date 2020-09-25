@@ -37,9 +37,7 @@ class AppState {
         isTwentyFourHour: false,
         sunrise: DateTime.now(),
         sunset: DateTime.now(),
-        lightOrDarkTheme: false,
-        url: 'Africa/Kampala',
-        alarm: TimeOfDay.now());
+        lightOrDarkTheme: false);
   }
 
   @override

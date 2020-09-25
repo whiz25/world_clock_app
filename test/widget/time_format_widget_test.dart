@@ -9,9 +9,8 @@ import 'package:world_clock_app/ui/city_time_screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:world_clock_app/util/http_client.dart' as httpClient;
 
+import '../utils/MockHttpClient.dart';
 import 'build_test_main.dart';
-
-class MockClient extends Mock implements http.Client {}
 
 void main() {
   setUp(() {

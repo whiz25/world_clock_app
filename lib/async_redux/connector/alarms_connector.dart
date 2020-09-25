@@ -15,6 +15,11 @@ class AlarmsConnector extends StatelessWidget {
   }
 
   Widget _alarmCard(BuildContext context, TimeModel timeModel) {
+    if (timeModel.alarm == null)
+    {
+      return Center(child: Text("No alarms"));
+    }
+
     return Container(
       padding: EdgeInsets.all(20.0),
       child: ClipRRect(

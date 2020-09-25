@@ -6,9 +6,8 @@ import 'package:world_clock_app/async_redux/store/redux_store.dart';
 import 'package:world_clock_app/ui/timezones_list_screen.dart';
 import 'package:world_clock_app/util/http_client.dart' as httpClient;
 
+import '../utils/MockHttpClient.dart';
 import 'build_test_main.dart';
-
-class MockClient extends Mock implements http.Client {}
 
 void main() {
   setUp(() {

@@ -67,6 +67,7 @@ class _CityTimeState extends State<CityTime>
             title: Text(bloc.url),
             actions: [
               IconButton(
+                key: Key("goto_alarms_button"),
                   icon: Icon(Icons.alarm),
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(

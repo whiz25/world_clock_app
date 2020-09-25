@@ -24,8 +24,8 @@ class SetAlarmConnector extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 40.0),
       child: Column(
-        children: [
-          Text('Upcoming alarm: ${timeModel.alarm.format(context)}'),
+        children: [          
+          timeModel.alarm != null ? Text('Upcoming alarm: ${timeModel.alarm.format(context)}') : Container(),
           RaisedButton(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5.0)),
