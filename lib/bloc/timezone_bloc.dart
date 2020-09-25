@@ -1,24 +1,17 @@
 import 'dart:async';
 
-import 'package:world_clock_app/api/timezone_client.dart';
 import 'package:world_clock_app/bloc/bloc.dart';
 import 'package:world_clock_app/bloc/timezone_state.dart';
+import 'package:world_clock_app/repository/irepository.dart';
 
-class TimezoneBloc extends Bloc<TimezoneState> {
+class TimezoneBloc extends AutoLoadCubit<TimezoneState> {
   final String region;
-  TimezoneBloc({this.region});
+  final ITimezoneRepository iTimezoneRepository;
+  TimezoneBloc(this.region, {this.iTimezoneRepository});
 
   @override
   FutureOr<TimezoneState> loadInitialState() async {
-    TimezoneClient timezoneClient = TimezoneClient();
-    List<dynamic> timezones =
-        await timezoneClient.loadTimezones(region: this.region);
+    var timezones = await this.iTimezoneRepository.getTimezoneList(this.region);
     return TimezoneState(timezones: timezones);
-  }
-
-  getTimezones(String region) async {
-    TimezoneClient timezoneClient = TimezoneClient();
-    var timezones = await timezoneClient.loadTimezones(region: region);
-    return timezones;
   }
 }

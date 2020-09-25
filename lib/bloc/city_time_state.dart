@@ -1,7 +1,8 @@
 import 'package:intl/intl.dart';
+import 'package:world_clock_app/model/timezone_info.dart';
 
 class CityTimeState {
-  Map<String, dynamic> cityTime;
+  TimezoneInfo cityTime;
   bool isTwentyFourHour;
   int twelveHour;
 
@@ -24,10 +25,10 @@ class CityTimeState {
   }
 
   DateTime timeNow() {
-    String datetime = cityTime['datetime'];
+    String datetime = cityTime.datetime;
     DateTime now = DateTime.parse(datetime);
-    String hours = cityTime['utc_offset'].substring(0, 3);
-    String minutes = cityTime['utc_offset'].substring(4, 6);
+    String hours = cityTime.utcOffset.substring(0, 3);
+    String minutes = cityTime.utcOffset.substring(4, 6);
     now =
         now.add(Duration(hours: int.parse(hours), minutes: int.parse(minutes)));
     return now;
@@ -40,7 +41,7 @@ class CityTimeState {
   }
 
   String get monthOfYear =>
-      DateFormat.MMMM().format(DateTime.parse(cityTime['datetime']));
+      DateFormat.MMMM().format(DateTime.parse(cityTime.datetime));
 
   bool get checkTimeOfDay {
     return timeNow().hour >= 8 && timeNow().hour <= 20 ? true : false;
@@ -51,7 +52,7 @@ class CityTimeState {
   }
 
   String get dayOfWeek {
-    int now = cityTime['day_of_week'];
+    int now = cityTime.dayOfWeek;
     switch (now) {
       case 1:
         return 'Monday';

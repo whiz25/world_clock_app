@@ -6,7 +6,7 @@ import 'package:world_clock_app/model/region_model.dart';
 
 import 'bloc.dart';
 
-class RegionBloc extends Bloc<RegionState> {
+class RegionBloc extends AutoLoadCubit<RegionState> {
   @override
   FutureOr<RegionState> loadInitialState() async {
     RegionClient regionClient = RegionClient();

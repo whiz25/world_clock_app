@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:world_clock_app/async_redux/connector/time_connector.dart';
-import 'package:world_clock_app/bloc/bloc_provider.dart';
 import 'package:world_clock_app/bloc/region_bloc.dart';
 import 'package:world_clock_app/bloc/region_state.dart';
 import 'package:world_clock_app/ui/settings_page.dart';
 import 'package:world_clock_app/ui/timezones_list_screen.dart';
 
 class ListRegions extends StatefulWidget {
+  const ListRegions({Key key}) : super(key: key);
+
   @override
   State createState() => _ListRegionsState();
 }
@@ -22,9 +24,14 @@ class _ListRegionsState extends State<ListRegions> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocPresenter<RegionState, RegionBloc>(
-        bloc: bloc,
-        builder: (context, state, bloc) {
+    return BlocBuilder<RegionBloc, RegionState>(
+        cubit: bloc,
+        builder: (context, state) {
+          if (state == null) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
           return Scaffold(
             appBar: AppBar(
               title: Text('Regions'),
@@ -64,15 +71,15 @@ class _ListRegionsState extends State<ListRegions> {
             title: Text(state.regions.regions[index]),
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) =>
-                      TimezoneList(region: state.regions.regions[index])));
+                  builder: (context) => TimezoneListScreen(
+                      region: state.regions.regions[index])));
             },
             trailing: IconButton(
               icon: Icon(Icons.arrow_forward_ios),
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) =>
-                        TimezoneList(region: state.regions.regions[index])));
+                    builder: (context) => TimezoneListScreen(
+                        region: state.regions.regions[index])));
               },
             ),
           );

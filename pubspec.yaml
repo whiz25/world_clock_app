@@ -35,6 +35,12 @@ dependencies:
   flutter_colorpicker: ^0.3.4
   flutter_local_notifications: ^1.4.4+4
   path_provider: ^1.6.16
+  hive: ^1.4.4
+  hive_flutter: ^0.3.1
+  flutter_bloc: ^6.0.5
+
+# dependency_overrides:
+#   analyzer: '0.39.14'
 
 dev_dependencies:
   flutter_test:
@@ -43,6 +49,9 @@ dev_dependencies:
   flutter_driver:
     sdk: flutter
   test: any
+
+  hive_generator: ^0.7.1
+  build_runner: any
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

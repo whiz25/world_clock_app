@@ -1,38 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:world_clock_app/bloc/bloc_provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:world_clock_app/bloc/timezone_bloc.dart';
 import 'package:world_clock_app/bloc/timezone_state.dart';
+import 'package:world_clock_app/repository/irepository.dart';
 import 'package:world_clock_app/ui/city_time_screen.dart';
 
-class TimezoneList extends StatefulWidget {
+class TimezoneListScreen extends StatefulWidget {
   final String region;
-  TimezoneList({this.region});
+  TimezoneListScreen({this.region});
 
   @override
-  _TimezoneListState createState() => _TimezoneListState();
+  _TimezoneListScreenState createState() => _TimezoneListScreenState();
 }
 
-class _TimezoneListState extends State<TimezoneList> {
+class _TimezoneListScreenState extends State<TimezoneListScreen> {
   TimezoneBloc bloc;
 
   @override
   void initState() {
     super.initState();
-    bloc = TimezoneBloc(region: this.widget.region);
+    bloc = TimezoneBloc(this.widget.region,
+        iTimezoneRepository:
+            RepositoryProvider.of<ITimezoneRepository>(context));
   }
 
   @override
   void dispose() {
     super.dispose();
 
-    bloc.dispose();
+    bloc.close();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocPresenter<TimezoneState, TimezoneBloc>(
-        bloc: bloc,
-        builder: (context, state, bloc) {
+    return BlocBuilder<TimezoneBloc, TimezoneState>(
+        cubit: bloc,
+        builder: (context, state) {
+          if (state == null) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
           return Scaffold(
             appBar: AppBar(
               title: Text(bloc.region),
@@ -44,15 +52,15 @@ class _TimezoneListState extends State<TimezoneList> {
 
   Widget _buildTimezoneList(BuildContext context, TimezoneState state) {
     return ListView.builder(
-        itemCount: state.timezones.length,
+        itemCount: state?.timezones?.timezones?.length ?? 0,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
-            title: Text(state.timezones[index]),
+            title: Text(state.timezones.timezones[index]),
             trailing: Icon(Icons.arrow_forward_ios),
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => CityTime(
-                        state.timezones[index],
+                        state.timezones.timezones[index],
                       )));
             },
           );

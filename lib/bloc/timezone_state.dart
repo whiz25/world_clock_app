@@ -1,9 +1,11 @@
+import 'package:world_clock_app/model/timezone.dart';
+
 class TimezoneState {
-  List<dynamic> timezones;
-  
+  TimezoneList timezones;
+
   TimezoneState({this.timezones});
 
-  TimezoneState copyWith({List<dynamic> timezones}) {
+  TimezoneState copyWith({TimezoneList timezones}) {
     return TimezoneState(timezones: timezones ?? this.timezones);
   }
 }

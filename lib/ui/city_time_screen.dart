@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:world_clock_app/async_redux/connector/set_alarm_connector.dart';
 import 'package:world_clock_app/async_redux/connector/time_connector.dart';
-import 'package:world_clock_app/bloc/bloc_provider.dart';
 import 'package:world_clock_app/bloc/city_time_bloc.dart';
 import 'package:world_clock_app/bloc/city_time_state.dart';
+import 'package:world_clock_app/repository/irepository.dart';
 import 'package:world_clock_app/ui/animation.dart';
 
 import 'alarms_screen.dart';
@@ -27,7 +28,8 @@ class _CityTimeState extends State<CityTime>
   @override
   void initState() {
     super.initState();
-    bloc = CityTimeBloc(url: this.widget.url);
+    bloc = CityTimeBloc(
+        this.widget.url, RepositoryProvider.of<ITimezoneRepository>(context));
 
     animationController = AnimationController(
         duration: Duration(milliseconds: 2000), vsync: this);
@@ -47,14 +49,19 @@ class _CityTimeState extends State<CityTime>
     super.dispose();
 
     animationController.dispose();
-    bloc.dispose();
+    bloc.close();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocPresenter<CityTimeState, CityTimeBloc>(
-      bloc: bloc,
-      builder: (context, state, bloc) {
+    return BlocBuilder<CityTimeBloc, CityTimeState>(
+      cubit: bloc,
+      builder: (context, state) {
+        if (state == null) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
         return Scaffold(
           appBar: AppBar(
             title: Text(bloc.url),

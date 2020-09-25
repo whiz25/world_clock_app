@@ -10,6 +10,6 @@ void main() {
     var storeTester = StoreTester(initialState: AppState.initialState());
     storeTester.dispatch(ColorThemeAction(newPrimaryColor));
 
-    TestInfo<AppState> info = await storeTester.wait(ColorThemeAction);
+    // TestInfo<AppState> info = await storeTester.wait(ColorThemeAction);
   });
 }

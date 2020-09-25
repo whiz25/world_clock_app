@@ -1,8 +1,12 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:world_clock_app/async_redux/store/app_state.dart';
 import 'package:world_clock_app/async_redux/view%20model/time_model.dart';
+import 'package:world_clock_app/repository/hive_timezone_repository.dart';
+import 'package:world_clock_app/repository/irepository.dart';
+import 'package:world_clock_app/repository/timezone_api_repository.dart';
 import 'package:world_clock_app/ui/regions_list_screen.dart';
 
 import 'async_redux/store/redux_store.dart';
@@ -33,11 +37,20 @@ void main() async {
     }
   });
 
-  runApp(StoreProvider<AppState>(
-      store: store,
-      child: StoreConnector<AppState, TimeModel>(
-        model: TimeModel(),
-        builder: (BuildContext context, TimeModel vm) =>
-            MaterialApp(theme: vm.checkThemeMode(), home: ListRegions()),
-      )));
+  HiveTimezoneRepository.initialize();
+
+  runApp(MultiRepositoryProvider(
+    providers: [
+      RepositoryProvider<ITimezoneRepository>(
+        create: (_) => HiveTimezoneRepository(TimezoneApiRepository()),
+      )
+    ],
+    child: StoreProvider<AppState>(
+        store: store,
+        child: StoreConnector<AppState, TimeModel>(
+          model: TimeModel(),
+          builder: (BuildContext context, TimeModel vm) =>
+              MaterialApp(theme: vm.checkThemeMode(), home: ListRegions()),
+        )),
+  ));
 }
