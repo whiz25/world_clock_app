@@ -11,7 +11,7 @@ class SunriseConnector extends StatelessWidget {
         model: TimeModel(),
         builder: (BuildContext context, TimeModel vm) => TimePickerButton(
               pickedTime: vm.sunrise,
-              onTimePicked: vm.setsunset,
+              onTimePicked: vm.setsunrise,
               buttonText: 'Change',
               timePickerButtonText: ' Sunrise: ',
             ));

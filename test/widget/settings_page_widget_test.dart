@@ -33,5 +33,8 @@ void main() {
     expect(find.byType(RaisedButton), findsOneWidget);
     expect(find.text(' Sunrise: '), findsOneWidget);
     expect(find.text('  Change'), findsOneWidget);
+
+    await tester.tap(find.text('  Change'));
+    await tester.pumpAndSettle();
   });
 }
