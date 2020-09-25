@@ -4,6 +4,7 @@ import 'package:world_clock_app/bloc/timezone_bloc.dart';
 import 'package:world_clock_app/bloc/timezone_state.dart';
 import 'package:world_clock_app/repository/irepository.dart';
 import 'package:world_clock_app/ui/city_time_screen.dart';
+import 'package:world_clock_app/widgets/progress_loader.dart';
 
 class TimezoneListScreen extends StatefulWidget {
   final String region;
@@ -37,9 +38,7 @@ class _TimezoneListScreenState extends State<TimezoneListScreen> {
         cubit: bloc,
         builder: (context, state) {
           if (state == null) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
+            return ProgressLoader();
           }
           return Scaffold(
             appBar: AppBar(

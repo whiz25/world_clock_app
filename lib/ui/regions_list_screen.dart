@@ -5,6 +5,7 @@ import 'package:world_clock_app/bloc/region_bloc.dart';
 import 'package:world_clock_app/bloc/region_state.dart';
 import 'package:world_clock_app/ui/settings_page.dart';
 import 'package:world_clock_app/ui/timezones_list_screen.dart';
+import 'package:world_clock_app/widgets/progress_loader.dart';
 
 class ListRegions extends StatefulWidget {
   const ListRegions({Key key}) : super(key: key);
@@ -28,9 +29,7 @@ class _ListRegionsState extends State<ListRegions> {
         cubit: bloc,
         builder: (context, state) {
           if (state == null) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
+            return ProgressLoader();
           }
           return Scaffold(
             appBar: AppBar(
