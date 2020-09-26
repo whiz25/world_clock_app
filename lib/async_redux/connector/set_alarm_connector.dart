@@ -7,10 +7,10 @@ import 'package:world_clock_app/async_redux/view%20model/time_model.dart';
 import '../../main.dart';
 
 class SetAlarmConnector extends StatelessWidget {
-  final String url;
+  final String timezone;
   TimeOfDay selectedTime;
 
-  SetAlarmConnector({this.url, this.selectedTime});
+  SetAlarmConnector({this.timezone, this.selectedTime});
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +24,10 @@ class SetAlarmConnector extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 40.0),
       child: Column(
-        children: [          
-          timeModel.alarm != null ? Text('Upcoming alarm: ${timeModel.alarm.format(context)}') : Container(),
+        children: [
+          timeModel.alarm != null
+              ? Text('Upcoming alarm: ${timeModel.alarm.format(context)}')
+              : Container(),
           RaisedButton(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5.0)),
@@ -37,7 +39,7 @@ class SetAlarmConnector extends StatelessWidget {
               if (this.selectedTime != null) {
                 var selectedDateTime =
                     DateTime(this.selectedTime.hour, this.selectedTime.minute);
-                timeModel.setAlarm(this.url, this.selectedTime);
+                timeModel.setAlarm(this.timezone, this.selectedTime);
                 scheduleAlarm(selectedDateTime);
               }
             },
@@ -72,7 +74,7 @@ class SetAlarmConnector extends StatelessWidget {
 
     await flutterLocalNotificationsPlugin.schedule(
         0,
-        '${this.url}',
+        '${this.timezone}',
         'Time to get some work done!',
         setNotificationDateTime,
         platformChannelSpecifics);

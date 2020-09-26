@@ -11,9 +11,9 @@ import 'package:world_clock_app/widgets/progress_loader.dart';
 import 'alarms_screen.dart';
 
 class CityTime extends StatefulWidget {
-  final String url;
+  final String timezone;
   final TimeOfDay selectedTime;
-  CityTime(this.url, {this.selectedTime});
+  CityTime(this.timezone, {this.selectedTime});
 
   @override
   State createState() => _CityTimeState();
@@ -30,7 +30,9 @@ class _CityTimeState extends State<CityTime>
   void initState() {
     super.initState();
     bloc = CityTimeBloc(
-        this.widget.url, RepositoryProvider.of<ITimezoneRepository>(context));
+        timezone: this.widget.timezone,
+        iTimezoneRepository:
+            RepositoryProvider.of<ITimezoneRepository>(context));
 
     animationController = AnimationController(
         duration: Duration(milliseconds: 2000), vsync: this);
@@ -63,10 +65,10 @@ class _CityTimeState extends State<CityTime>
         }
         return Scaffold(
           appBar: AppBar(
-            title: Text(bloc.url),
+            title: Text(bloc.timezone),
             actions: [
               IconButton(
-                key: Key("goto_alarms_button"),
+                  key: Key("goto_alarms_button"),
                   icon: Icon(Icons.alarm),
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
@@ -115,7 +117,7 @@ class _CityTimeState extends State<CityTime>
                 TextStyle(fontSize: 45.0 * animation.timeAnimation.value),
           ),
           SetAlarmConnector(
-            url: this.widget.url,
+            timezone: this.widget.timezone,
             selectedTime: this.widget.selectedTime,
           ),
         ],
